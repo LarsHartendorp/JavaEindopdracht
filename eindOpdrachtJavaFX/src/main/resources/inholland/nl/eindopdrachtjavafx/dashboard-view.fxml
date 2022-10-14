@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="68.0" prefWidth="1000.0" spacing="5.0">
+         <children>
+            <Button fx:id="lendingAndReceiving" mnemonicParsing="false" onAction="#pageLending" prefWidth="120.0" text="Lending/receiving" />
+            <Button fx:id="collection" mnemonicParsing="false" prefWidth="120.0" text="Collection" />
+            <Button fx:id="members" mnemonicParsing="false" prefWidth="120.0" text="Members" textAlignment="RIGHT" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="20.0" />
+         </padding>
+      </HBox>
+      <AnchorPane fx:id="contentForAllViews" layoutX="-1.0" layoutY="89.0" prefHeight="500.0" prefWidth="1000.0" />
+   </children>
+</AnchorPane>
