@@ -8,4 +8,8 @@ module inholland.nl.eindopdrachtjavafx {
     exports inholland.nl.eindopdrachtjavafx;
     exports inholland.nl.eindopdrachtjavafx.Controllers;
     opens inholland.nl.eindopdrachtjavafx.Controllers to javafx.fxml;
+
+    exports inholland.nl.eindopdrachtjavafx.Models;
+    exports inholland.nl.eindopdrachtjavafx.DAL;
+    opens inholland.nl.eindopdrachtjavafx.Models to javafx.base;
 }

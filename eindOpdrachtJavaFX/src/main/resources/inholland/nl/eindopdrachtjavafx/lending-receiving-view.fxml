@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Welcome"/>
+      <Label fx:id="WelcomeLabel" text="Welcome"/>
       <HBox>
       <VBox>
          <TextField fx:id="ItemCodeLending" />

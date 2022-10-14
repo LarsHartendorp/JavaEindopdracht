@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,8 +19,6 @@ import java.util.Date;
 // bemiddelaar tussen View en Model.
 // clickevents worden hier afgehandeld
 // praat met de logica laag
-
-
 public class DashboardController {
     private Database database;
     @FXML
@@ -29,12 +28,12 @@ public class DashboardController {
         this.member = member;
         this.database = database;
     }
-
-    public void pageLending(ActionEvent actionEvent) throws Exception {
+    public void pageLending(ActionEvent actionEvent) throws IOException {
         // anchorpane wordt hier aangeroepen
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("lending-receiving-view.fxml"));
-        DashboardController dashboardController = new DashboardController(member, database);
-        fxmlLoader.setController(dashboardController);
+        //DashboardController dashboardController = new DashboardController(member, database);
+        LendingReceivingController lendingReceivingController = new LendingReceivingController(member, database);
+        fxmlLoader.setController(lendingReceivingController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
 }

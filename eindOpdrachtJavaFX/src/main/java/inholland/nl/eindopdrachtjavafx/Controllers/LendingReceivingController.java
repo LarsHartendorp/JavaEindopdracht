@@ -1,24 +1,22 @@
 package inholland.nl.eindopdrachtjavafx.Controllers;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
-import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class LendingReceivingController {
 
     private Database database;
     private Member member;
-    @FXML
-    private TextField ItemCodeLending;
-    @FXML
-    private TextField MemberIdentifier;
-    @FXML
-    private Button LendButton;
+    @FXML public Label WelcomeLabel;
+    @FXML public TextField ItemCodeLending;
+    @FXML public TextField MemberIdentifier;
+    @FXML public Button LendButton;
+    @FXML public TextField ItemCodeReceiving;
+    @FXML public Button ReceiveButton;
 
     public LendingReceivingController(Member member, Database database) {
         this.member = member;
