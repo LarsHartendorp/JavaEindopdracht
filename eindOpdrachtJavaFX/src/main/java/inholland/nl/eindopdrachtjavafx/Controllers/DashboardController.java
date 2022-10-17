@@ -31,9 +31,15 @@ public class DashboardController {
     public void pageLending(ActionEvent actionEvent) throws IOException {
         // anchorpane wordt hier aangeroepen
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("lending-receiving-view.fxml"));
-        //DashboardController dashboardController = new DashboardController(member, database);
         LendingReceivingController lendingReceivingController = new LendingReceivingController(member, database);
         fxmlLoader.setController(lendingReceivingController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
+
+/*    public void pageCollection(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("collection-view.fxml"));
+        CollectionController collectionController = new CollectionController(member, database);
+        fxmlLoader.setController(collectionController);
+        this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
+    }*/
 }

@@ -7,14 +7,14 @@ import java.util.Date;
 
 public class Item {
     // has item code, availability, title, author,
-    private String itemCode;
+    private int itemCode;
     private boolean availability;
     private String title;
     private String author;
     private LocalDate lendingDate;
 
     // constructor
-    public Item(String itemCode, boolean availability, String title, String author, String status, LocalDate lendingDate) {
+    public Item(int itemCode, boolean availability, String title, String author, String status, LocalDate lendingDate) {
         this.itemCode = itemCode;
         this.availability = availability;
         this.title = title;
@@ -23,11 +23,11 @@ public class Item {
     }
 
     // getters and setters
-    public String getItemCode() {
+    public int getItemCode() {
         return itemCode;
     }
 
-    public void setItemCode(String itemCode) {
+    public void setItemCode(int  itemCode) {
         this.itemCode = itemCode;
     }
 

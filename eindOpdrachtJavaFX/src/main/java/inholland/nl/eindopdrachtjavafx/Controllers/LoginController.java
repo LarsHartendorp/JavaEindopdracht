@@ -17,13 +17,9 @@ public class LoginController {
     public LoginController() {
         this.database = new Database();
     }
-
-    @FXML
-    private TextField usernameTextfield;
-    @FXML
-    private PasswordField passwordTextfield;
-    @FXML
-    private Label errorLabel;
+    @FXML private TextField usernameTextfield;
+    @FXML private PasswordField passwordTextfield;
+    @FXML private Label errorLabel;
     public void login(ActionEvent event) throws Exception {
         //stappenplan
         // check if username and password are in database and are correct
