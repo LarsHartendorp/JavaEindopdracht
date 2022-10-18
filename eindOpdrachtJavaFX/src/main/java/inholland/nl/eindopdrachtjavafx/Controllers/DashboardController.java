@@ -21,8 +21,7 @@ import java.util.Date;
 // praat met de logica laag
 public class DashboardController {
     private Database database;
-    @FXML
-    private AnchorPane contentForAllViews;
+    @FXML private AnchorPane contentForAllViews;
     private Member member;
     public DashboardController(Member member, Database database) {
         this.member = member;
@@ -36,10 +35,10 @@ public class DashboardController {
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
 
-/*    public void pageCollection(ActionEvent actionEvent) throws IOException {
+    public void pageCollection(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("collection-view.fxml"));
         CollectionController collectionController = new CollectionController(member, database);
         fxmlLoader.setController(collectionController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
-    }*/
+    }
 }

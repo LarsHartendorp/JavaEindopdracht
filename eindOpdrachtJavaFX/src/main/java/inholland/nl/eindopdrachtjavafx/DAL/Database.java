@@ -25,11 +25,11 @@ public class Database {
 
         this.items = new ArrayList<>();
         // add items to collection
-        items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", "Available", LocalDate.now()));
+        items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", "Available", LocalDate.of(1997, 6, 26)));
         items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", "Available", LocalDate.of(2021, 1, 1)));
-        items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", "Available", null));
-        items.add(new Item(4, true, "Lord of the Rings", "J.R.R. Tolkien", "Available", null));
-        items.add(new Item(5, true, "Rich Dad Poor Dad", "Robert T. Kiyosaki", "Available", null));
+        items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", "Available", LocalDate.of(2021, 1, 1)));
+            items.add(new Item(4, true, "Lord of the Rings", "J.R.R. Tolkien", "Available", LocalDate.of(2021, 1, 1)));
+        items.add(new Item(5, true, "Rich Dad Poor Dad", "Robert T. Kiyosaki", "Available", LocalDate.of(2021, 1, 1)));
     }
 
     // return collection of users
@@ -39,16 +39,26 @@ public class Database {
 
 
     // make method to check if itemcode and member are in database
-    public boolean checkItemCodeAndMember(int itemCode, String member) {
+    public boolean checkItemCodeAndMember(int itemCode, int memberID) {
         // check if itemcode is in database
         for (Item item : items) {
             if (item.getItemCode() == itemCode) {
                 // check if member is in database
                 for (Member existingMember : members) {
-                    if (existingMember.getMembername().equals(member)) {
+                    if (existingMember.getMemberID() == memberID) {
                         return true;
                     }
                 }
+            }
+        }
+        return false;
+    }
+    // make method to check if itemcode is in database
+    public boolean checkItemCode(int itemCode) {
+        // check if itemcode is in database
+        for (Item item : items) {
+            if (item.getItemCode() == itemCode) {
+                return true;
             }
         }
         return false;
@@ -61,6 +71,7 @@ public class Database {
         for (Item item : items) {
             if (item.getItemCode() == itemCode) {
                 lendingDate = item.getLendingDate();
+                System.out.println(item.getLendingDate());
             }
         }
         // calculate overdue days
@@ -68,8 +79,8 @@ public class Database {
         int overdueDays = today.getDayOfYear() - lendingDate.getDayOfYear();
         return overdueDays;
     }
-    public void lentItem (int itemCode, String membername) {
-        if (checkItemCodeAndMember(itemCode, membername)) {
+    public void lentItem (int itemCode, int memberID) {
+        if (checkItemCodeAndMember(itemCode, memberID)) {
             for (Item item : items) {
                 if (item.getItemCode() == itemCode) {
                     item.setAvailability(false);
@@ -79,19 +90,54 @@ public class Database {
             }
         }
     }
-    public void receivedItem(int itemcode){
-        if (checkItemCodeAndMember(itemcode, null)) {
+    public boolean receivedItem(int itemcode) {
+        if (checkItemCode(itemcode)) {
             for (Item item : items) {
                 if (item.getItemCode() == itemcode) {
                     item.setAvailability(true);
-                    item.setLendingDate(null);
-                    return;
+/*                    item.setLendingDate(null);*/
+                    return true;
                 }
             }
         }
+        return false;
     }
 
-    public ObservableList getAllItems() {
-        return (ObservableList) items;
+    //check if item is already lent
+    public boolean checkIfItemIsAlreadyLent(int itemCode, int memberID) {
+        for (Item item : items) {
+            if (item.getItemCode() == itemCode) {
+                if (!item.getAvailability()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // check if item is already received
+    public boolean checkIfItemIsAlreadyReceived(int itemCode) {
+        for (Item item : items) {
+            if (item.getItemCode() == itemCode) {
+                if (item.getAvailability()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public List<Item> getAllItems() {
+        return items;
+    }
+
+
+    public Item getItem(int itemCode) {
+        for (Item item : items) {
+            if (item.getItemCode() == itemCode) {
+                return item;
+            }
+        }
+        return null;
     }
 }

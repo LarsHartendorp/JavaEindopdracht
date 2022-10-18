@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="77.0" layoutY="51.0" prefHeight="30.0" prefWidth="39.0" text="Items">
@@ -19,10 +20,26 @@
       </Label>
       <TableView fx:id="tableViewCollection" layoutX="77.0" layoutY="111.0" prefHeight="275.0" prefWidth="850.0">
         <columns>
-          <TableColumn prefWidth="89.0" text="Item code" />
-          <TableColumn prefWidth="108.0" text="Available" />
-            <TableColumn prefWidth="389.0" text="Title" />
-            <TableColumn prefWidth="263.0" text="Author" />
+          <TableColumn prefWidth="89.0" text="Item code" >
+            <cellValueFactory>
+                <PropertyValueFactory property="itemCode" />
+            </cellValueFactory>
+            </TableColumn>
+          <TableColumn prefWidth="108.0" text="Available" >
+              <cellValueFactory>
+                  <PropertyValueFactory property="availability" />
+              </cellValueFactory>
+          </TableColumn>
+            <TableColumn prefWidth="389.0" text="Title" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="title" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="263.0" text="Author" >
+            <cellValueFactory>
+                <PropertyValueFactory property="author" />
+            </cellValueFactory>
+        </TableColumn>
         </columns>
       </TableView>
       <HBox layoutX="77.0" layoutY="391.0" prefHeight="50.0" prefWidth="350.0" spacing="15.0">

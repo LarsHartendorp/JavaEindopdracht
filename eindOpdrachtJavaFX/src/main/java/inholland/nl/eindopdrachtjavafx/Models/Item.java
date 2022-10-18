@@ -27,7 +27,7 @@ public class Item {
         return itemCode;
     }
 
-    public void setItemCode(int  itemCode) {
+    public void setItemCode(int itemCode) {
         this.itemCode = itemCode;
     }
 
