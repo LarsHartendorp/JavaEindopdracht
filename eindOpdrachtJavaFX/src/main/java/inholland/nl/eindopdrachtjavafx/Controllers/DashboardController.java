@@ -41,4 +41,11 @@ public class DashboardController {
         fxmlLoader.setController(collectionController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
+
+    public void pageMember(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("member-view.fxml"));
+        MemberController memberController = new MemberController(member, database);
+        fxmlLoader.setController(memberController);
+        this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
+    }
 }

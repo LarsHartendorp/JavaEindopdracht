@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="77.0" layoutY="51.0" prefHeight="30.0" prefWidth="125.0" text="Members">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableViewMember" layoutX="77.0" layoutY="111.0" prefHeight="275.0" prefWidth="850.0">
+            <columns>
+                <TableColumn prefWidth="89.0" text="Identifier">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="memberID" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="247.0" text="First name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="firstname" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="311.0" text="Last name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="lastname" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="202.0" text="Birth date">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="dateOfBirth" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <HBox layoutX="77.0" layoutY="391.0" prefHeight="50.0" prefWidth="350.0" spacing="15.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#addMember" text="Add member" />
+                <Button mnemonicParsing="false" onAction="#editMember" text="Edit member" />
+                <Button mnemonicParsing="false" onAction="#deleteMember" text="Delete member" />
+            </children>
+            <padding>
+                <Insets bottom="15.0" right="15.0" top="15.0" />
+            </padding>
+        </HBox>
+    </children>
+</AnchorPane>

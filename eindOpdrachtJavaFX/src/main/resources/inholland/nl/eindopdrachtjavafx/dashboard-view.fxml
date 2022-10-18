@@ -10,8 +10,8 @@
       <HBox alignment="BOTTOM_RIGHT" prefHeight="68.0" prefWidth="1000.0" spacing="5.0">
          <children>
             <Button fx:id="lendingAndReceiving" mnemonicParsing="false" onAction="#pageLending" prefWidth="120.0" text="Lending/receiving" />
-            <Button fx:id="collection" mnemonicParsing="false" prefWidth="120.0" onAction="#pageCollection" text="Collection" />
-            <Button fx:id="members" mnemonicParsing="false" prefWidth="120.0" text="Members" textAlignment="RIGHT" />
+            <Button fx:id="collection" mnemonicParsing="false" onAction="#pageCollection" prefWidth="120.0"  text="Collection" />
+            <Button fx:id="members" mnemonicParsing="false" onAction="#pageMember" prefWidth="120.0" text="Members" textAlignment="RIGHT" />
          </children>
          <opaqueInsets>
             <Insets />

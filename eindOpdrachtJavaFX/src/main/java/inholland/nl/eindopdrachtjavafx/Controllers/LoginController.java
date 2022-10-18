@@ -27,7 +27,7 @@ public class LoginController {
         // if not, show error message in label
 
         for (Member member : database.getUsers()) {
-            if (member.getMembername().equals(usernameTextfield.getText()) && member.getPassword().equals(passwordTextfield.getText())) {
+            if (member.getFirstname().equals(usernameTextfield.getText()) && member.getPassword().equals(passwordTextfield.getText())) {
                  FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("dashboard-view.fxml"));
                  DashboardController dashboardController = new DashboardController(member, database);
                  fxmlLoader.setController(dashboardController);

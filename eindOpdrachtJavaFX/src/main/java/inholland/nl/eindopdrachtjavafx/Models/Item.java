@@ -1,26 +1,38 @@
 package inholland.nl.eindopdrachtjavafx.Models;
 
+import inholland.nl.eindopdrachtjavafx.DAL.Database;
+import javafx.scene.chart.PieChart;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Item {
-    // has item code, availability, title, author,
+    // has item code, availability, title, author
     private int itemCode;
     private boolean availability;
     private String title;
     private String author;
     private LocalDate lendingDate;
+    private Database database;
 
     // constructor
-    public Item(int itemCode, boolean availability, String title, String author, String status, LocalDate lendingDate) {
+    public Item(boolean availability, String title, String author, LocalDate lendingDate) {
+        this.availability = availability;
+        this.title = title;
+        this.author = author;
+        this.lendingDate = lendingDate;
+    }
+
+    public Item(int itemCode, boolean availability, String title, String author, LocalDate lendingDate) {
         this.itemCode = itemCode;
         this.availability = availability;
         this.title = title;
         this.author = author;
         this.lendingDate = lendingDate;
     }
+
 
     // getters and setters
     public int getItemCode() {
