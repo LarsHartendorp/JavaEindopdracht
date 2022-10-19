@@ -38,6 +38,8 @@ public class Member {
         return fullname;
     }
 
+    public String getUsername() { return username; }
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
