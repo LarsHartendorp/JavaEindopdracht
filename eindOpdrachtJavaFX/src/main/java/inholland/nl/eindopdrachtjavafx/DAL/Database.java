@@ -153,12 +153,45 @@ public class Database {
         item.setItemCode(this.generateItemCode());
         items.add(item);
     }
+    public void addMember(Member member) {
+        member.setMemberID(this.generateMemberID());
+        members.add(member);
+    }
 
     public void editItem(Item item) {
         for (Item existingItem : items) {
             if (existingItem.getItemCode() == item.getItemCode()) {
                 existingItem.setTitle(item.getTitle());
                 existingItem.setAuthor(item.getAuthor());
+            }
+        }
+    }
+
+    public void editMember(Member member) {
+        for (Member existingMember : members) {
+            if (existingMember.getMemberID() == member.getMemberID()) {
+                existingMember.setFirstname(member.getFirstname());
+                existingMember.setLastname(member.getLastname());
+                existingMember.setDateOfBirth(member.getDateOfBirth());
+            }
+        }
+    }
+
+    // delete item from database
+    public void deleteItem(Item item) {
+        for (Item existingItem : items) {
+            if (existingItem.getItemCode() == item.getItemCode()) {
+                items.remove(existingItem);
+                return;
+            }
+        }
+    }
+
+    public void deleteMember(Member member) {
+        for (Member existingMember : members) {
+            if (existingMember.getMemberID() == member.getMemberID()) {
+                members.remove(existingMember);
+                return;
             }
         }
     }
@@ -174,13 +207,15 @@ public class Database {
         return itemCode + 1;
     }
 
-    // delete item from database
-    public void deleteItem(Item item) {
-        for (Item existingItem : items) {
-            if (existingItem.getItemCode() == item.getItemCode()) {
-                items.remove(existingItem);
-                return;
+    public int generateMemberID() {
+        int memberID = 0;
+        for (Member member : members) {
+            if (member.getMemberID() > memberID) {
+                memberID = member.getMemberID();
             }
         }
+        return memberID + 1;
     }
+
+
 }

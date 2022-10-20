@@ -21,31 +21,63 @@ public class Member {
         this.password = password;
     }
 
-    //getters
+    public Member(String firstname, String lastname, LocalDate dateOfBirth) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    //getters and setters
     public int getMemberID() {
         return memberID;
+    }
+
+    public int setMemberID(int memberID) {
+        return this.memberID = memberID;
     }
 
     public String getFirstname() {
         return firstname;
     }
 
+    public String setFirstname(String firstname) {
+        return this.firstname = firstname;
+    }
+
     public String getLastname() {
         return lastname;
+    }
+
+    public String setLastname(String lastname) {
+        return this.lastname = lastname;
     }
 
     public String getFullname() {
         return fullname;
     }
 
+    public String setFullname(String fullname) {
+        return this.fullname = fullname;
+    }
+
     public String getUsername() { return username; }
+
+    public String setUsername(String username) { return this.username = username; }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
+    public LocalDate setDateOfBirth(LocalDate dateOfBirth) {
+        return this.dateOfBirth = dateOfBirth;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public String setPassword(String password) {
+        return this.password = password;
     }
 
 

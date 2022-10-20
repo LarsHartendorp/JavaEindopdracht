@@ -6,20 +6,23 @@ import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 // bemiddelaar tussen View en Model.
 // clickevents worden hier afgehandeld
 // praat met de logica laag
-public class DashboardController {
+public class DashboardController implements Initializable {
     private Database database;
     @FXML private AnchorPane contentForAllViews;
     private Member member;
@@ -27,6 +30,8 @@ public class DashboardController {
         this.member = member;
         this.database = database;
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){}
     public void pageLending(ActionEvent actionEvent) throws IOException {
         // anchorpane wordt hier aangeroepen
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("lending-receiving-view.fxml"));

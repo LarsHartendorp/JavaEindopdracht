@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,12 +13,12 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label layoutX="77.0" layoutY="51.0" prefHeight="30.0" prefWidth="125.0" text="Members">
+        <Label layoutX="77.0" layoutY="14.0" prefHeight="30.0" prefWidth="125.0" text="Members">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TableView fx:id="tableViewMember" layoutX="77.0" layoutY="111.0" prefHeight="275.0" prefWidth="850.0">
+        <TableView fx:id="tableViewMember" layoutX="77.0" layoutY="60.0" prefHeight="275.0" prefWidth="850.0">
             <columns>
                 <TableColumn prefWidth="89.0" text="Identifier">
                     <cellValueFactory>
@@ -41,15 +42,30 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <HBox layoutX="77.0" layoutY="391.0" prefHeight="50.0" prefWidth="350.0" spacing="15.0">
+        <HBox layoutX="77.0" layoutY="364.0" prefHeight="25.0" prefWidth="850.0" spacing="15.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#addMember" text="Add member" />
-                <Button mnemonicParsing="false" onAction="#editMember" text="Edit member" />
-                <Button mnemonicParsing="false" onAction="#deleteMember" text="Delete member" />
+            <TextField fx:id="firstnameTextfield" promptText="Firstname"/>
+            <TextField fx:id="lastnameTextfield" promptText="Lastname"/>
+            <TextField fx:id="birthdateTextfield" promptText="Birthdate"/>
+                <Button fx:id="memberAdd" mnemonicParsing="false" onAction="#addMember" text="Add member" />
+                <Button fx:id="memberEdit" mnemonicParsing="false" onAction="#editMember" text="Edit member" />
+                <Button fx:id="memberDelete" mnemonicParsing="false" onAction="#deleteMember" text="Delete member" />
             </children>
             <padding>
                 <Insets bottom="15.0" right="15.0" top="15.0" />
             </padding>
         </HBox>
+      <HBox layoutX="87.0" layoutY="419.0" prefHeight="55.0" prefWidth="850.0" spacing="15.0">
+         <padding>
+            <Insets bottom="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <Label fx:id="errorLabelMember" prefHeight="20.0" prefWidth="844.0" text="Tap once on a row to show first name, last name and birth date.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

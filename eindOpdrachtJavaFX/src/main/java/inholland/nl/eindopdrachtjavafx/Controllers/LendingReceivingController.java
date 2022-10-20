@@ -89,9 +89,10 @@ public class LendingReceivingController implements Initializable {
                     this.database.receivedItem(itemCode);
                     throw new Exception("Item " + ItemCodeReceiving.getText() + " has been received.");
                 }
-            }}catch(Exception e){
-                    errorHandlingReceiving.setText(e.getMessage());
             }
+        }catch(Exception e){
+                    errorHandlingReceiving.setText(e.getMessage());
+        }
     }
 }
 

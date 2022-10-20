@@ -37,17 +37,19 @@ public class CollectionController implements Initializable {
     }
 
     public void addItem(ActionEvent actionEvent) {
-        String title = textFieldTitle.getText();
-        String author = textFieldAuthor.getText();
-        LocalDate lendingDate = LocalDate.now();
-
-        // textfields vervangen
-        if (textFieldTitle.getText().isEmpty() || textFieldAuthor.getText().isEmpty()) {
-            this.errorLabel.setText("Please fill in all fields to add new item");
-        } else {
-            Item item = new Item(true, title, author, lendingDate);
-            this.database.addItem(item);
-            reloadTable();
+        try {
+            String title = textFieldTitle.getText();
+            String author = textFieldAuthor.getText();
+            LocalDate lendingDate = LocalDate.now();
+            if (title.isEmpty() || author.isEmpty()) {
+                throw new Exception("Please fill in all fields to add new item");
+            } else {
+                Item item = new Item(true, title, author, lendingDate);
+                this.database.addItem(item);
+                reloadTable();
+            }
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
         }
     }
 
@@ -59,29 +61,35 @@ public class CollectionController implements Initializable {
     }
 
     public void editItem(ActionEvent actionEvent) {
-        String title = textFieldTitle.getText();
-        String author = textFieldAuthor.getText();
-        Item item = tableViewCollection.getSelectionModel().getSelectedItem();
-        item.setTitle(title);
-        item.setAuthor(author);
-        this.database.editItem(item);
-        reloadTable();
+        try {
+            String title = textFieldTitle.getText();
+            String author = textFieldAuthor.getText();
+            Item item = tableViewCollection.getSelectionModel().getSelectedItem();
+            item.setTitle(title);
+            item.setAuthor(author);
+            this.database.editItem(item);
+            reloadTable();
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 
     public void deleteItem(ActionEvent actionEvent) {
-        // show popup to confirm delete
-        Item item = tableViewCollection.getSelectionModel().getSelectedItem();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("Are you sure you want to delete this item? " + item.getTitle());
-        alert.showAndWait().ifPresent(response -> {
-            if (response == alert.getButtonTypes().get(0)) {
-                this.database.deleteItem(item);
-                reloadTable();
-            }
-        });
+        try {
+            Item item = tableViewCollection.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Are you sure you want to delete this item? " + item.getTitle());
+            alert.showAndWait().ifPresent(response -> {
+                if (response == alert.getButtonTypes().get(0)) {
+                    this.database.deleteItem(item);
+                    reloadTable();
+                }
+            });
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 
-    // dit even bij alle controllers doen.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setItemInTable(this.database.getAllItems());
