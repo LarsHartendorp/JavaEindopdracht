@@ -49,7 +49,6 @@ public class LendingReceivingController implements Initializable {
 
     public void lendingItem(ActionEvent event) {
         try {
-            // itemcode vervangen
             if (this.ItemCodeLending.getText().isEmpty() || this.ItemCodeLending.getText() == null || this.MemberIdentifier.getText().isEmpty() || this.MemberIdentifier.getText() == null) {
                 throw new Exception("Please check if all fields are filled in and are correct");
             }
@@ -57,6 +56,8 @@ public class LendingReceivingController implements Initializable {
             int memberID = Integer.parseInt(MemberIdentifier.getText());
             if (itemCode < 1 || memberID < 1) {
                 throw new Exception("Item code or member ID can't be lower than 1");
+            } else if(!this.database.checkItemCodeAndMember(itemCode, memberID)){
+                throw new Exception("Item code or member ID does not exist in current database");
             } else if (this.database.checkIfItemIsAlreadyLent(itemCode, memberID)) {
                 throw new Exception("Item is already lent");
             } else {
@@ -80,7 +81,9 @@ public class LendingReceivingController implements Initializable {
             }
             if (this.database.checkIfItemIsAlreadyReceived(itemCode)) {
                 throw new Exception("Item can't be received because it's not lent");
-            } else {
+            } else if(!this.database.checkItemCode(itemCode)){
+                throw new Exception("Item code or member ID does not exist in current database");
+            }else {
                 Item item = this.database.getItem(itemCode);
                 if (item.getLendingDate().plusDays(DAYS_OVERDUE).isBefore(LocalDate.now())) {
                     this.database.receivedItem(itemCode); // instead of received item, add a fine. (Will do this later if necessary)

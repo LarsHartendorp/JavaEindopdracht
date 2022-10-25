@@ -64,31 +64,37 @@ public class MemberController implements Initializable {
         try {
             String firstname = firstnameTextfield.getText();
             String lastname = lastnameTextfield.getText();
-            LocalDate birthdate = LocalDate.parse(birthdateTextfield.getText());
             if (firstname.isEmpty() || lastname.isEmpty() || birthdateTextfield.getText().isEmpty()) {
                 throw new Exception("Please fill in all fields to add new member");
-            } else {
-                Member member = new Member(firstname, lastname, birthdate);
-                this.database.addMember(member);
-                reloadTable();
             }
+            LocalDate birthdate = LocalDate.parse(birthdateTextfield.getText());
+            Member member = new Member(firstname, lastname, birthdate);
+            this.database.addMember(member);
+            reloadTable();
+
         } catch (Exception e) {
             errorLabelMember.setText(e.getMessage());
         }
     }
 
-    public void editMember(ActionEvent actionEvent) {
+    public void editMember(ActionEvent event) throws Exception {
         try {
+            Member member = tableViewMember.getSelectionModel().getSelectedItem();
+            if(member == null){
+                throw new Exception("Please select a member to edit");
+            }
+            if (firstnameTextfield.getText().isEmpty() || lastnameTextfield.getText().isEmpty() || birthdateTextfield.getText().isEmpty()) {
+                throw new Exception("Please fill in all fields to edit member");
+            }
             String firstname = firstnameTextfield.getText();
             String lastname = lastnameTextfield.getText();
             LocalDate birthdate = LocalDate.parse(birthdateTextfield.getText());
-            Member member = tableViewMember.getSelectionModel().getSelectedItem();
             member.setFirstname(firstname);
             member.setLastname(lastname);
             member.setDateOfBirth(birthdate);
             this.database.editMember(member);
             reloadTable();
-        } catch (Exception e) {
+    } catch (Exception e) {
             errorLabelMember.setText(e.getMessage());
         }
     }
@@ -96,18 +102,19 @@ public class MemberController implements Initializable {
     public void deleteMember(ActionEvent actionEvent) {
         try {
             Member member = tableViewMember.getSelectionModel().getSelectedItem();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("Are you sure you want to delete this item? " + member.getFirstname() + " " + member.getLastname());
-            alert.showAndWait().ifPresent(response -> {
-                if (response == alert.getButtonTypes().get(0)) {
-                    this.database.deleteMember(member);
-                    reloadTable();
-                }
-            });
+            if (member == null) {
+                throw new Exception("Please select a member to delete");
+            }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Are you sure you want to delete this item? " + member.getFirstname() + " " + member.getLastname());
+        alert.showAndWait().ifPresent(response -> {
+            if (response == alert.getButtonTypes().get(0)) {
+                this.database.deleteMember(member);
+                reloadTable();
+            }
+        });
         } catch (Exception e) {
             errorLabelMember.setText(e.getMessage());
         }
     }
-
-
 }
