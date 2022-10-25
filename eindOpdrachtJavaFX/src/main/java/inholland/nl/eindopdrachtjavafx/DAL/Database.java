@@ -5,39 +5,45 @@ import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database {
-// create collection of users
+public class Database  {
     private List<Member> members;
 
     private List<Item> items;
 
     public Database() {
-        this.members = new ArrayList<>();
-        // add users to collection
-        this.members.add(new Member(1, "Lars","Lars", "H", "Lars H", LocalDate.of(1990, 1, 1), "1234"));
-        this.members.add(new Member(2, "Jane","Jane", "Doe", "Jane Doe", LocalDate.of(1994, 6, 15), "1794"));
-        this.members.add(new Member(3, "John","John", "Smith", "John Smith", LocalDate.of(1992, 3, 12), "1234"));
-        this.members.add(new Member(4, "Jane2","Jane", "Smith", "Jane Smith", LocalDate.of(1995, 8, 23), "5678"));
-        this.members.add(new Member(5, "John2","John", "Doe", "John Doe", LocalDate.of(1990, 1, 1), "2378"));
 
+        this.members = new ArrayList<>();
         this.items = new ArrayList<>();
-        // add items to collection
-        this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));
-        this.items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", LocalDate.of(1998, 7, 2)));
-        this.items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", LocalDate.of(1999, 7, 8)));
-        this.items.add(new Item(4, true, "Harry Potter and the Goblet of Fire", "J.K. Rowling", LocalDate.of(2000, 7, 8)));
-        this.items.add(new Item(5, true, "Harry Potter and the Order of the Phoenix", "J.K. Rowling", LocalDate.of(2003, 6, 21)));
-        this.items.add(new Item(6, true, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", LocalDate.of(2005, 7, 16)));
-        this.items.add(new Item(7, true, "Harry Potter and the Deathly Hallows", "J.K. Rowling", LocalDate.of(2007, 7, 21)));
+        try {
+            loadDataForMembers();
+            loadDataForItems();
+        } catch (IOException e) {
+            // add users to collection
+            this.members.add(new Member(1, "Lars","Lars", "H", "Lars H", LocalDate.of(1990, 1, 1), "1234"));
+            this.members.add(new Member(2, "Jane","Jane", "Doe", "Jane Doe", LocalDate.of(1994, 6, 15), "1794"));
+            this.members.add(new Member(3, "John","John", "Smith", "John Smith", LocalDate.of(1992, 3, 12), "1234"));
+            this.members.add(new Member(4, "Jane2","Jane", "Smith", "Jane Smith", LocalDate.of(1995, 8, 23), "5678"));
+            this.members.add(new Member(5, "John2","John", "Doe", "John Doe", LocalDate.of(1990, 1, 1), "2378"));
+
+            // add items to collection
+            this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));
+            this.items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", LocalDate.of(1998, 7, 2)));
+            this.items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", LocalDate.of(1999, 7, 8)));
+            this.items.add(new Item(4, true, "Harry Potter and the Goblet of Fire", "J.K. Rowling", LocalDate.of(2000, 7, 8)));
+            this.items.add(new Item(5, true, "Harry Potter and the Order of the Phoenix", "J.K. Rowling", LocalDate.of(2003, 6, 21)));
+            this.items.add(new Item(6, true, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", LocalDate.of(2005, 7, 16)));
+            this.items.add(new Item(7, true, "Harry Potter and the Deathly Hallows", "J.K. Rowling", LocalDate.of(2007, 7, 21)));
+        }
 
     }
 
     // return collection of users
-    public List<Member> getUsers() {
+    public List<Member> getMember() {
         return members;
     }
 
@@ -217,5 +223,83 @@ public class Database {
         return memberID + 1;
     }
 
+   // save data for items
+    public void saveDataForItems() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("items.dat");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            // write loop for all items
+            for (Item item : items) {
+                objectOutputStream.writeObject(item);
+            }
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    // save data for members and serialize
+    public void saveDataForMembers() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("members.dat");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            // write loop for all members
+            for (Member member : members) {
+                objectOutputStream.writeObject(member);
+            }
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveData() {
+        saveDataForItems();
+        saveDataForMembers();
+    }
+
+
+    // load data for items
+    public void loadDataForItems() throws IOException{
+        try {
+            FileInputStream fileInputStream = new FileInputStream("items.dat");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            // read loop for all items
+            while (true) {
+                try {
+                    Item item = (Item) objectInputStream.readObject();
+                    items.add(item);
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // load data for members
+    public void loadDataForMembers() throws IOException {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("members.dat");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            // read loop for all members
+            while (true) {
+                try {
+                    Member member = (Member) objectInputStream.readObject();
+                    members.add(member);
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

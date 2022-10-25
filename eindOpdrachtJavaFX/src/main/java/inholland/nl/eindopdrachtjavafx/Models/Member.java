@@ -1,8 +1,9 @@
 package inholland.nl.eindopdrachtjavafx.Models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Member {
+public class Member implements Serializable {
     //has username and password
     private int memberID;
     private String username;

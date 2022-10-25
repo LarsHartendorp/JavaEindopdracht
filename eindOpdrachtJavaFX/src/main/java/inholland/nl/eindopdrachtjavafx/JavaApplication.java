@@ -16,6 +16,7 @@ public class JavaApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("login-view.fxml"));
         // Scene is de inhoud van de applicatie
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add("file:src/main/resources/inholland/nl/eindopdrachtjavafx/style.css");
         stage.setResizable(false);
         stage.setTitle("Library system");
         stage.setScene(scene);

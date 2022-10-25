@@ -7,17 +7,17 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="68.0" prefWidth="1000.0" spacing="5.0">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="68.0" prefWidth="1000.0" spacing="5.0" styleClass="DashboardCSS">
          <children>
-            <Button fx:id="lendingAndReceiving" mnemonicParsing="false" onAction="#pageLending" prefWidth="120.0" text="Lending/receiving" />
-            <Button fx:id="collection" mnemonicParsing="false" onAction="#pageCollection" prefWidth="120.0"  text="Collection" />
-            <Button fx:id="members" mnemonicParsing="false" onAction="#pageMember" prefWidth="120.0" text="Members" textAlignment="RIGHT" />
+            <Button fx:id="lendingAndReceiving" mnemonicParsing="false" onAction="#pageLending" prefWidth="150.0" text="Lending/receiving" />
+            <Button fx:id="collection" mnemonicParsing="false" onAction="#pageCollection" prefWidth="150.0" text="Collection" />
+            <Button fx:id="members" mnemonicParsing="false" onAction="#pageMember" prefWidth="150.0" text="Members" textAlignment="RIGHT" />
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <padding>
-            <Insets right="20.0" />
+            <Insets bottom="20.0" right="20.0" />
          </padding>
       </HBox>
       <AnchorPane fx:id="contentForAllViews" layoutX="-1.0" layoutY="89.0" prefHeight="500.0" prefWidth="1000.0" />

@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label layoutX="77.0" layoutY="14.0" prefHeight="30.0" prefWidth="125.0" text="Members">
+        <Label layoutX="77.0" layoutY="14.0" prefHeight="30.0" prefWidth="125.0" styleClass="LabelHeader" text="Members">
             <font>
                 <Font size="14.0" />
             </font>
@@ -42,14 +42,14 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <HBox layoutX="77.0" layoutY="364.0" prefHeight="25.0" prefWidth="850.0" spacing="15.0">
+        <HBox layoutX="77.0" layoutY="364.0" prefHeight="25.0" prefWidth="850.0" spacing="10.0">
             <children>
-            <TextField fx:id="firstnameTextfield" promptText="Firstname"/>
-            <TextField fx:id="lastnameTextfield" promptText="Lastname"/>
-            <TextField fx:id="birthdateTextfield" promptText="Birthdate"/>
-                <Button fx:id="memberAdd" mnemonicParsing="false" onAction="#addMember" text="Add member" />
-                <Button fx:id="memberEdit" mnemonicParsing="false" onAction="#editMember" text="Edit member" />
-                <Button fx:id="memberDelete" mnemonicParsing="false" onAction="#deleteMember" text="Delete member" />
+            <TextField fx:id="firstnameTextfield" prefWidth="140.0" promptText="Firstname" />
+            <TextField fx:id="lastnameTextfield" prefWidth="140.0" promptText="Lastname" />
+            <TextField fx:id="birthdateTextfield" prefWidth="140.0" promptText="Birthdate" />
+                <Button fx:id="memberAdd" mnemonicParsing="false" onAction="#addMember" prefWidth="130.0" text="Add member" />
+                <Button fx:id="memberEdit" mnemonicParsing="false" onAction="#editMember" prefWidth="130.0" text="Edit member" />
+                <Button fx:id="memberDelete" mnemonicParsing="false" onAction="#deleteMember" prefWidth="130.0" text="Delete member" />
             </children>
             <padding>
                 <Insets bottom="15.0" right="15.0" top="15.0" />

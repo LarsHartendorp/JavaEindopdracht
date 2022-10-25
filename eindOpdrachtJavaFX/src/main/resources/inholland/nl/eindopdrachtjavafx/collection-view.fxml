@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="77.0" layoutY="14.0" prefHeight="30.0" prefWidth="135.0" text="Items">
+      <Label layoutX="77.0" layoutY="14.0" prefHeight="30.0" prefWidth="135.0" styleClass="LabelHeader" text="Items">
          <font>
             <Font size="14.0" />
          </font>
@@ -56,11 +56,11 @@
       </HBox>
       <HBox layoutX="77.0" layoutY="364.0" prefHeight="25.0" prefWidth="850.0" spacing="5.0">
          <children>
-            <TextField fx:id="textFieldTitle" prefHeight="25.0" prefWidth="338.0" promptText="Title" />
-            <TextField fx:id="textFieldAuthor" prefHeight="25.0" prefWidth="193.0" promptText="Author" />
-            <Button mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="98.0" text="Add item" />
-            <Button mnemonicParsing="false" onAction="#editItem" text="Edit item" />
-            <Button mnemonicParsing="false" onAction="#deleteItem" text="Delete item" />
+            <TextField fx:id="textFieldTitle" prefHeight="25.0" prefWidth="298.0" promptText="Title" />
+            <TextField fx:id="textFieldAuthor" prefHeight="25.0" prefWidth="183.0" promptText="Author" />
+            <Button mnemonicParsing="false" onAction="#addItem" prefWidth="120.0" text="Add item" />
+            <Button mnemonicParsing="false" onAction="#editItem" prefWidth="120.0" text="Edit item" />
+            <Button mnemonicParsing="false" onAction="#deleteItem" prefWidth="120.0" text="Delete item" />
          </children>
       </HBox>
    </children>
