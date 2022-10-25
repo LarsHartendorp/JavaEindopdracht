@@ -19,22 +19,14 @@ import java.util.ResourceBundle;
 public class LendingReceivingController implements Initializable {
     private Database database;
     private Member member;
-    @FXML
-    public Label nameOfUserLabel;
-    @FXML
-    public TextField ItemCodeLending;
-    @FXML
-    public TextField MemberIdentifier;
-    @FXML
-    public Button LendButton;
-    @FXML
-    public Label errorHandling;
-    @FXML
-    public Label errorHandlingReceiving;
-    @FXML
-    public TextField ItemCodeReceiving;
-    @FXML
-    public Button ReceiveButton;
+    @FXML private Label nameOfUserLabel;
+    @FXML private TextField ItemCodeLending;
+    @FXML private TextField MemberIdentifier;
+    @FXML private Button LendButton;
+    @FXML private Label errorHandling;
+    @FXML private Label errorHandlingReceiving;
+    @FXML private TextField ItemCodeReceiving;
+    @FXML public Button ReceiveButton;
 
 
     public LendingReceivingController(Member member, Database database) {
