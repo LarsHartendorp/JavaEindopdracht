@@ -86,7 +86,7 @@ public class LendingReceivingController implements Initializable {
                 }
             }
         }catch(Exception e){
-                    errorHandlingReceiving.setText(e.getMessage());
+            errorHandlingReceiving.setText(e.getMessage());
         }
     }
 }

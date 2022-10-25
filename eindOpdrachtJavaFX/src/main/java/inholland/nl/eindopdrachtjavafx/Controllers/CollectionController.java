@@ -20,9 +20,9 @@ import java.util.ResourceBundle;
 public class CollectionController implements Initializable {
     private Member member;
     private Database database;
-    @FXML public Label errorLabel;
-    @FXML public TextField textFieldTitle;
-    @FXML public TextField textFieldAuthor;
+    @FXML private Label errorLabel;
+    @FXML private TextField textFieldTitle;
+    @FXML private TextField textFieldAuthor;
     @FXML private TableView<Item> tableViewCollection;
     public CollectionController(Member member, Database database) {
         this.member = member;
@@ -60,12 +60,11 @@ public class CollectionController implements Initializable {
             Item item = tableViewCollection.getSelectionModel().getSelectedItem();
             if (item == null) {
                 throw new Exception("Please select an item to edit");
-            } else {
-                item.setTitle(title);
-                item.setAuthor(author);
-                this.database.editItem(item);
-                reloadTable();
             }
+            item.setTitle(title);
+            item.setAuthor(author);
+            this.database.editItem(item);
+            reloadTable();
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());
         }
@@ -77,15 +76,14 @@ public class CollectionController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             if (item == null) {
                 throw new Exception("Please select an item to delete");
-            } else {
-                alert.setHeaderText("Are you sure you want to delete this item? " + item.getTitle());
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == alert.getButtonTypes().get(0)) {
-                        this.database.deleteItem(item);
-                        reloadTable();
-                    }
-                });
             }
+            alert.setHeaderText("Are you sure you want to delete this item? " + item.getTitle());
+            alert.showAndWait().ifPresent(response -> {
+                if (response == alert.getButtonTypes().get(0)) {
+                    this.database.deleteItem(item);
+                    reloadTable();
+                }
+            });
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());
         }

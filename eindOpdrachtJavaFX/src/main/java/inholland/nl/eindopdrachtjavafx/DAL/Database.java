@@ -153,7 +153,6 @@ public class Database  {
         return false;
     }
 
-
     // add new item to database
     public void addItem(Item item) {
         item.setItemCode(this.generateItemCode());
@@ -259,7 +258,6 @@ public class Database  {
         saveDataForItems();
         saveDataForMembers();
     }
-
 
     // load data for items
     public void loadDataForItems() throws IOException{

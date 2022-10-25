@@ -30,7 +30,7 @@ public class LoginController implements Initializable, Serializable {
     public void login(ActionEvent event) throws Exception {
         try {
             for (Member member : database.getMember()) {
-                if (member.getUsername().equals(usernameTextfield.getText()) && member.getPassword().equals(passwordTextfield.getText())) {
+                if (member.getUsername().equalsIgnoreCase(usernameTextfield.getText()) && member.getPassword().equals(passwordTextfield.getText())) {
                     FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("dashboard-view.fxml"));
                     DashboardController dashboardController = new DashboardController(member, database);
                     fxmlLoader.setController(dashboardController);
