@@ -52,9 +52,7 @@ public class LoginController implements Initializable, Serializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {    }
 }
 
 

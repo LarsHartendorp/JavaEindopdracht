@@ -17,15 +17,15 @@
          </font></Label>
       <HBox layoutX="116.0" layoutY="97.0" prefHeight="341.0" prefWidth="706.0" spacing="50.0">
       <VBox prefHeight="125.0" prefWidth="300.0" spacing="30.0">
-         <TextField fx:id="ItemCodeLending" promptText="Item code">
+         <TextField fx:id="itemCodeLending" promptText="Item code">
                <font>
                   <Font size="14.0" />
                </font></TextField>
-         <TextField fx:id="MemberIdentifier" promptText="Member identifier">
+         <TextField fx:id="memberIdentifier" promptText="Member identifier">
                <font>
                   <Font size="14.0" />
                </font></TextField>
-         <Button fx:id="LendButton" onAction="#lendingItem" prefWidth="120.0" text="Lend">
+         <Button fx:id="lendButton" onAction="#lendingItem" prefWidth="120.0" text="Lend">
                <font>
                   <Font size="14.0" />
                </font></Button>
@@ -39,12 +39,12 @@
             </padding>
       </VBox>
       <VBox prefHeight="125.0" prefWidth="300.0" spacing="30.0">
-         <TextField fx:id="ItemCodeReceiving" promptText="Item code">
+         <TextField fx:id="itemCodeReceiving" promptText="Item code">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-         <Button fx:id="ReceiveButton" mnemonicParsing="false" onAction="#receivingItem" prefWidth="120.0" text="Receive">
+         <Button fx:id="receiveButton" mnemonicParsing="false" onAction="#receivingItem" prefWidth="120.0" text="Receive">
                <font>
                   <Font size="14.0" />
                </font>

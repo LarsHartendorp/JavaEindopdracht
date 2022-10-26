@@ -121,7 +121,7 @@ public class Database  {
             for (Item item : items) {
                 if (item.getItemCode() == itemcode) {
                     item.setAvailability(true);
-/*                    item.setLendingDate(null);*/
+/*                    item.setLendingDate(null);*/ // dit moet nog worden aangepast, als dat mogelijk is. Null veroorzaakt error.
                     return true;
                 }
             }

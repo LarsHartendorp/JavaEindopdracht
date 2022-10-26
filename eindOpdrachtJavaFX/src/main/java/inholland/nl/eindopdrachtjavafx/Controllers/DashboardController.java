@@ -31,13 +31,15 @@ public class DashboardController implements Initializable {
         this.database = database;
     }
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){}
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        try {
+            this.openPageLending();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void pageLending(ActionEvent actionEvent) throws IOException {
-        // anchorpane wordt hier aangeroepen
-        FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("lending-receiving-view.fxml"));
-        LendingReceivingController lendingReceivingController = new LendingReceivingController(member, database);
-        fxmlLoader.setController(lendingReceivingController);
-        this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
+        openPageLending();
     }
 
     public void pageCollection(ActionEvent actionEvent) throws IOException {
@@ -51,6 +53,13 @@ public class DashboardController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("member-view.fxml"));
         MemberController memberController = new MemberController(member, database);
         fxmlLoader.setController(memberController);
+        this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
+    }
+
+    public void openPageLending() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("lending-receiving-view.fxml"));
+        LendingReceivingController lendingReceivingController = new LendingReceivingController(member, database);
+        fxmlLoader.setController(lendingReceivingController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
 }
