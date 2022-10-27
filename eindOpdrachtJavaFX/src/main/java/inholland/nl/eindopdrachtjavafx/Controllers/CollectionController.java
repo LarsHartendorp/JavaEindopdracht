@@ -69,6 +69,7 @@ public class CollectionController implements Initializable {
     public void deleteItem() {
         try {
             Item item = tableViewCollection.getSelectionModel().getSelectedItem();
+            // alert als waarschuwing.
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             if (item == null) {
                 throw new Exception("Please select an item to delete");
@@ -89,6 +90,7 @@ public class CollectionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setItemInTable(this.database.getAllItems());
         this.tableViewCollection.setOnMouseClicked(MouseEvent -> {
+            // 1x klikken om rij te selecteren en tekstvelden te vullen
             if (MouseEvent.getClickCount() == 1) {
                 try {
                     Item item = tableViewCollection.getSelectionModel().getSelectedItem();
@@ -100,6 +102,7 @@ public class CollectionController implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                // 2x klikken om de beschikbaarheid van het item te veranderen
             } else if (MouseEvent.getClickCount() == 2) {
                 // double click
                 try {

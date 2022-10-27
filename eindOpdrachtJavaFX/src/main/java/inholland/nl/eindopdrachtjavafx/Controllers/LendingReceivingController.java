@@ -48,7 +48,7 @@ public class LendingReceivingController implements Initializable {
             int memberID = Integer.parseInt(memberIdentifier.getText());
             if (itemCode < 1 || memberID < 1) {
                 throw new Exception("Item code or member ID can't be lower than 1");
-            } else if(!this.database.checkItemCodeAndMember(itemCode, memberID)){ 
+            } else if(!this.database.checkItemCodeAndMember(itemCode, memberID)){
                 throw new Exception("Item code or member ID does not exist in current database");
             } else if (this.database.checkIfItemIsAlreadyLent(itemCode)) {
                 throw new Exception("Item is already lent");

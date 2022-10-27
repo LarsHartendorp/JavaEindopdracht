@@ -30,14 +30,17 @@ public class LoginController {
                     FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("dashboard-view.fxml"));
                     DashboardController dashboardController = new DashboardController(member, database);
                     fxmlLoader.setController(dashboardController);
+                    // maak een Scene aan
                     Scene scene = new Scene(fxmlLoader.load());
                     scene.getStylesheets().add("file:src/main/resources/inholland/nl/eindopdrachtjavafx/style.css");
+                    // maak een Stage aan
                     Stage window = new Stage();
                     window.setTitle("Library Management System");
                     window.setScene(scene);
                     window.show();
                     Stage s = (Stage)((Node)(event.getSource())).getScene().getWindow();
                     s.close();
+                    // Data wordt opgeslagen in de database als de applicatie wordt afgesloten
                     window.setOnCloseRequest(e -> this.database.saveData());
                 } else {
                     throw new Exception("Username or password is incorrect");
