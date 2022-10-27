@@ -33,8 +33,8 @@ public class Member implements Serializable {
         return memberID;
     }
 
-    public int setMemberID(int memberID) {
-        return this.memberID = memberID;
+    public void setMemberID(int memberID) {
+         this.memberID = memberID;
     }
 
     public String getFirstname() {
@@ -80,6 +80,4 @@ public class Member implements Serializable {
     public String setPassword(String password) {
         return this.password = password;
     }
-
-
 }

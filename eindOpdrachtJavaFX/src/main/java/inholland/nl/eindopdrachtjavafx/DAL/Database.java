@@ -2,9 +2,6 @@ package inholland.nl.eindopdrachtjavafx.DAL;
 
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +13,6 @@ public class Database  {
     private List<Item> items;
 
     public Database() {
-
         this.members = new ArrayList<>();
         this.items = new ArrayList<>();
         try {
@@ -25,7 +21,7 @@ public class Database  {
         } catch (IOException e) {
             // add users to collection
             this.members.add(new Member(1, "Lars","Lars", "H", "Lars H", LocalDate.of(1990, 1, 1), "1234"));
-            this.members.add(new Member(2, "Jane","Jane", "Doe", "Jane Doe", LocalDate.of(1994, 6, 15), "1794"));
+            this.members.add(new Member(2, "Test","Jane", "Doe", "Jane Doe", LocalDate.of(1994, 6, 15), "0000"));
             this.members.add(new Member(3, "John","John", "Smith", "John Smith", LocalDate.of(1992, 3, 12), "1234"));
             this.members.add(new Member(4, "Jane2","Jane", "Smith", "Jane Smith", LocalDate.of(1995, 8, 23), "5678"));
             this.members.add(new Member(5, "John2","John", "Doe", "John Doe", LocalDate.of(1990, 1, 1), "2378"));
@@ -54,7 +50,6 @@ public class Database  {
     public List<Member> getAllMembers(){
         return members;
     }
-
 
     public Item getItem(int itemCode) {
         for (Item item : items) {
@@ -116,10 +111,10 @@ public class Database  {
             }
         }
     }
-    public boolean receivedItem(int itemcode) {
-        if (checkItemCode(itemcode)) {
+    public boolean receivedItem(int itemCode) {
+        if (checkItemCode(itemCode)) {
             for (Item item : items) {
-                if (item.getItemCode() == itemcode) {
+                if (item.getItemCode() == itemCode) {
                     item.setAvailability(true);
 /*                    item.setLendingDate(null);*/ // dit moet nog worden aangepast, als dat mogelijk is. Null veroorzaakt error.
                     return true;
@@ -130,7 +125,7 @@ public class Database  {
     }
 
     //check if item is already lent
-    public boolean checkIfItemIsAlreadyLent(int itemCode, int memberID) {
+    public boolean checkIfItemIsAlreadyLent(int itemCode) {
         for (Item item : items) {
             if (item.getItemCode() == itemCode) {
                 if (!item.getAvailability()) {
@@ -210,6 +205,7 @@ public class Database  {
             }
         }
         return itemCode + 1;
+        //return items.size() + 1;
     }
 
     public int generateMemberID() {
@@ -223,7 +219,7 @@ public class Database  {
     }
 
    // save data for items
-    public void saveDataForItems() {
+    private void saveDataForItems() {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("items.dat");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -239,7 +235,7 @@ public class Database  {
     }
 
     // save data for members and serialize
-    public void saveDataForMembers() {
+    private void saveDataForMembers() {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("members.dat");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);

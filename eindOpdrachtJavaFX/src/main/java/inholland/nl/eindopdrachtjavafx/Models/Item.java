@@ -1,13 +1,8 @@
 package inholland.nl.eindopdrachtjavafx.Models;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
-import javafx.scene.chart.PieChart;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Item implements Serializable {
     // has item code, availability, title, author

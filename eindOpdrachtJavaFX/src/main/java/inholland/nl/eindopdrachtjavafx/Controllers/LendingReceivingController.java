@@ -3,15 +3,11 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -36,12 +32,10 @@ public class LendingReceivingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         nameOfUserLabel.setText("Welcome " + member.getFullname());
-
     }
 
-    public void lendingItem(ActionEvent event) {
+    public void lendingItem() {
         try {
             if (this.itemCodeLending.getText().isEmpty() || this.itemCodeLending.getText() == null || this.memberIdentifier.getText().isEmpty() || this.memberIdentifier.getText() == null) {
                 throw new Exception("Please check if all fields are filled in and are correct");
@@ -52,7 +46,7 @@ public class LendingReceivingController implements Initializable {
                 throw new Exception("Item code or member ID can't be lower than 1");
             } else if(!this.database.checkItemCodeAndMember(itemCode, memberID)){
                 throw new Exception("Item code or member ID does not exist in current database");
-            } else if (this.database.checkIfItemIsAlreadyLent(itemCode, memberID)) {
+            } else if (this.database.checkIfItemIsAlreadyLent(itemCode)) {
                 throw new Exception("Item is already lent");
             } else {
                 this.database.lentItem(itemCode, memberID);
@@ -63,7 +57,7 @@ public class LendingReceivingController implements Initializable {
         }
     }
 
-    public void receivingItem(ActionEvent actionEvent) {
+    public void receivingItem() {
         try {
             if (this.itemCodeReceiving.getText().isEmpty() || this.itemCodeReceiving.getText() == null) {
                 throw new Exception("Please check if all fields are filled in and are correct");

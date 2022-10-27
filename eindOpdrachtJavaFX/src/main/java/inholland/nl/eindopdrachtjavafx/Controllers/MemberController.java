@@ -1,17 +1,15 @@
 package inholland.nl.eindopdrachtjavafx.Controllers;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
-import inholland.nl.eindopdrachtjavafx.Models.Item;
-import javafx.event.ActionEvent;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -60,7 +58,7 @@ public class MemberController implements Initializable {
         tableViewMember.setItems(FXCollections.observableArrayList(members));
     }
 
-    public void addMember(ActionEvent actionEvent) {
+    public void addMember() {
         try {
             String firstname = firstnameTextfield.getText();
             String lastname = lastnameTextfield.getText();
@@ -77,7 +75,7 @@ public class MemberController implements Initializable {
         }
     }
 
-    public void editMember(ActionEvent event) throws Exception {
+    public void editMember() {
         try {
             Member member = tableViewMember.getSelectionModel().getSelectedItem();
             if(member == null){
@@ -94,12 +92,12 @@ public class MemberController implements Initializable {
             member.setDateOfBirth(birthdate);
             this.database.editMember(member);
             reloadTable();
-    } catch (Exception e) {
+        } catch (Exception e) {
             errorLabelMember.setText(e.getMessage());
         }
     }
 
-    public void deleteMember(ActionEvent actionEvent) {
+    public void deleteMember() {
         try {
             Member member = tableViewMember.getSelectionModel().getSelectedItem();
             if (member == null) {

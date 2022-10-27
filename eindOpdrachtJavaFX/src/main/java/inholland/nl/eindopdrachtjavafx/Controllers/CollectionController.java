@@ -10,8 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -36,24 +34,23 @@ public class CollectionController implements Initializable {
         this.tableViewCollection.refresh();
     }
 
-    public void addItem(ActionEvent actionEvent) {
+    public void addItem() {
         try {
             String title = textFieldTitle.getText();
             String author = textFieldAuthor.getText();
             LocalDate lendingDate = LocalDate.now();
             if (title.isEmpty() || author.isEmpty()) {
                 throw new Exception("Please fill in all fields to add new item");
-            } else {
-                Item item = new Item(true, title, author, lendingDate);
-                this.database.addItem(item);
-                reloadTable();
             }
+            Item item = new Item(true, title, author, lendingDate);
+            this.database.addItem(item);
+            reloadTable();
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());
         }
     }
 
-    public void editItem(ActionEvent actionEvent) {
+    public void editItem() {
         try {
             String title = textFieldTitle.getText();
             String author = textFieldAuthor.getText();
@@ -70,7 +67,7 @@ public class CollectionController implements Initializable {
         }
     }
 
-    public void deleteItem(ActionEvent actionEvent) {
+    public void deleteItem() {
         try {
             Item item = tableViewCollection.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

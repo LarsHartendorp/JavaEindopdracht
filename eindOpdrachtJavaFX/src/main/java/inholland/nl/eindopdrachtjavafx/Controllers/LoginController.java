@@ -1,11 +1,11 @@
 package inholland.nl.eindopdrachtjavafx.Controllers;
+
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.JavaApplication;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,21 +13,17 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.Serializable;
-import java.net.URL;
-import java.util.EventListener;
-import java.util.ResourceBundle;
-
-public class LoginController implements Initializable, Serializable {
-
+public class LoginController {
     private Database database;
-    public LoginController() {
-        this.database = new Database();
-    }
     @FXML private TextField usernameTextfield;
     @FXML private PasswordField passwordTextfield;
     @FXML private Label errorLabel;
-    public void login(ActionEvent event) throws Exception {
+
+    public LoginController() {
+        this.database = new Database();
+    }
+
+    public void login(ActionEvent event) {
         try {
             for (Member member : database.getMember()) {
                 if (member.getUsername().equalsIgnoreCase(usernameTextfield.getText()) && member.getPassword().equals(passwordTextfield.getText())) {
@@ -50,9 +46,6 @@ public class LoginController implements Initializable, Serializable {
             errorLabel.setText(e.getMessage());
         }
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {    }
 }
 
 
