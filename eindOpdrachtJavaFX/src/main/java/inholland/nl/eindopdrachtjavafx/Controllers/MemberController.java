@@ -3,7 +3,6 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -32,7 +31,7 @@ public class MemberController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setMemberInTable(this.database.getAllMembers());
-        this.tableViewMember.setOnMouseClicked((MouseEvent) -> {
+        this.tableViewMember.setOnMouseClicked(MouseEvent -> {
             if (MouseEvent.getClickCount() == 1) {
                 try {
                     Member member = tableViewMember.getSelectionModel().getSelectedItem();

@@ -25,6 +25,7 @@ public class LendingReceivingController implements Initializable {
     @FXML public Button receiveButton;
 
 
+    // Constructor
     public LendingReceivingController(Member member, Database database) {
         this.member = member;
         this.database = database;
@@ -40,11 +41,14 @@ public class LendingReceivingController implements Initializable {
             if (this.itemCodeLending.getText().isEmpty() || this.itemCodeLending.getText() == null || this.memberIdentifier.getText().isEmpty() || this.memberIdentifier.getText() == null) {
                 throw new Exception("Please check if all fields are filled in and are correct");
             }
+            // check if input are both digits
+            checkIfInputIsString(itemCodeLending.getText(), "Item code can't be a string");
+            checkIfInputIsString(memberIdentifier.getText(), "Member ID can't be a string");
             int itemCode = Integer.parseInt(itemCodeLending.getText());
             int memberID = Integer.parseInt(memberIdentifier.getText());
             if (itemCode < 1 || memberID < 1) {
                 throw new Exception("Item code or member ID can't be lower than 1");
-            } else if(!this.database.checkItemCodeAndMember(itemCode, memberID)){
+            } else if(!this.database.checkItemCodeAndMember(itemCode, memberID)){ 
                 throw new Exception("Item code or member ID does not exist in current database");
             } else if (this.database.checkIfItemIsAlreadyLent(itemCode)) {
                 throw new Exception("Item is already lent");
@@ -59,17 +63,23 @@ public class LendingReceivingController implements Initializable {
 
     public void receivingItem() {
         try {
+            // if empty or null
             if (this.itemCodeReceiving.getText().isEmpty() || this.itemCodeReceiving.getText() == null) {
                 throw new Exception("Please check if all fields are filled in and are correct");
             }
+            // check if input is digit
+            checkIfInputIsString(itemCodeReceiving.getText(), "item code can't be a string");
             int itemCode = Integer.parseInt(itemCodeReceiving.getText());
             final int DAYS_OVERDUE = 21;
             if (itemCode < 1) {
-                throw new Exception("Item code can't be lower than 1");
+                throw new NumberFormatException("Item code can't be lower than 1");
             }
+            // check if item is already lent
             if (this.database.checkIfItemIsAlreadyReceived(itemCode)) {
                 throw new Exception("Item can't be received because it's not lent");
-            } else if(!this.database.checkItemCode(itemCode)){
+            }
+            // check if item exists
+            else if(!this.database.checkItemCode(itemCode)){
                 throw new Exception("Item code or member ID does not exist in current database");
             }else {
                 Item item = this.database.getItem(itemCode);
@@ -83,6 +93,12 @@ public class LendingReceivingController implements Initializable {
             }
         }catch(Exception e){
             errorHandlingReceiving.setText(e.getMessage());
+        }
+    }
+    // check if input is String instead of int
+    private void checkIfInputIsString(String input, String exceptionMessage) {
+        if (input.matches("[a-zA-Z]+")) {
+            throw new NumberFormatException(exceptionMessage);
         }
     }
 }

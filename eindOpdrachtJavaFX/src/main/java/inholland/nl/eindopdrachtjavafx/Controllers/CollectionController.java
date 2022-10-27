@@ -3,7 +3,6 @@ import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -89,7 +88,7 @@ public class CollectionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setItemInTable(this.database.getAllItems());
-        this.tableViewCollection.setOnMouseClicked((MouseEvent) -> {
+        this.tableViewCollection.setOnMouseClicked(MouseEvent -> {
             if (MouseEvent.getClickCount() == 1) {
                 try {
                     Item item = tableViewCollection.getSelectionModel().getSelectedItem();

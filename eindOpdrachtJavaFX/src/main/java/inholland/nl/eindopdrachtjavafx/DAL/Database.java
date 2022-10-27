@@ -97,8 +97,7 @@ public class Database  {
         }
         // calculate overdue days
         LocalDate today = LocalDate.now();
-        int overdueDays = today.getDayOfYear() - lendingDate.getDayOfYear();
-        return overdueDays;
+        return today.getDayOfYear() - lendingDate.getDayOfYear();
     }
     public void lentItem (int itemCode, int memberID) {
         if (checkItemCodeAndMember(itemCode, memberID)) {
@@ -127,10 +126,8 @@ public class Database  {
     //check if item is already lent
     public boolean checkIfItemIsAlreadyLent(int itemCode) {
         for (Item item : items) {
-            if (item.getItemCode() == itemCode) {
-                if (!item.getAvailability()) {
-                    return true;
-                }
+            if (item.getItemCode() == itemCode && !item.getAvailability()) {
+                return true;
             }
         }
         return false;
@@ -139,10 +136,8 @@ public class Database  {
     // check if item is already received
     public boolean checkIfItemIsAlreadyReceived(int itemCode) {
         for (Item item : items) {
-            if (item.getItemCode() == itemCode) {
-                if (item.getAvailability()) {
-                    return true;
-                }
+            if (item.getItemCode() == itemCode && item.getAvailability()) {
+                return true;
             }
         }
         return false;

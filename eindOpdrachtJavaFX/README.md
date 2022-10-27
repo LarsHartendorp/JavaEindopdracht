@@ -8,4 +8,4 @@ username is niet hoofdletter gevoelig.
 2. Username: `test` Password: `0000`
 
 
-_veel plezier met het proberen te kraken._
+_veel plezier met het ~~proberen te~~ kraken._
