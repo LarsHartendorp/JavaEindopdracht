@@ -25,14 +25,17 @@ public class CollectionController implements Initializable {
         this.member = member;
         this.database = database;
     }
+    // alle items in de tabelView
     private void setItemInTable(List<Item> items){
         tableViewCollection.setItems(FXCollections.observableArrayList(items));
     }
+    // herladen van de tabelView
     private void reloadTable() {
         setItemInTable(this.database.getAllItems());
         this.tableViewCollection.refresh();
     }
 
+    // toevoegen van een item
     public void addItem() {
         try {
             String title = textFieldTitle.getText();
@@ -49,6 +52,7 @@ public class CollectionController implements Initializable {
         }
     }
 
+    // bewerken van een item
     public void editItem() {
         try {
             String title = textFieldTitle.getText();
@@ -66,6 +70,7 @@ public class CollectionController implements Initializable {
         }
     }
 
+    // verwijderen van een item
     public void deleteItem() {
         try {
             Item item = tableViewCollection.getSelectionModel().getSelectedItem();
