@@ -3,6 +3,7 @@ package inholland.nl.eindopdrachtjavafx.DAL;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import inholland.nl.eindopdrachtjavafx.Models.User;
+import javafx.scene.control.DatePicker;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -30,10 +31,10 @@ public class Database  {
             this.users.add(new User("admin", "admin"));
             this.users.add(new User("user", "1234"));
 
-            // add members to collection
-            this.members.add(new Member(1, "Lars", "Hartendorp", LocalDate.of(1996, 8, 15)));
-            this.members.add(new Member(2, "Jeroen", "van der Heijden", LocalDate.of(2000, 10, 7)));
-            this.members.add(new Member(3, "Johan", "Zeurpiet", LocalDate.of(2008, 6, 28)));
+            // add members to collection, date of birth must be YYYY-MM-DD
+            this.members.add(new Member(1, "Lars", "Hartendorp", LocalDate.of(2000, 12, 15)));
+            this.members.add(new Member(2, "Jeroen", "van der Heijden", LocalDate.of(1999, 6, 3)));
+            this.members.add(new Member(3, "Johan", "Zeurpiet", LocalDate.of(1987, 1, 2)));
 
             // add items to collection
             this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));

@@ -28,6 +28,7 @@ public class CollectionController implements Initializable {
     @FXML private TextField textFieldTitle;
     @FXML private TextField textFieldAuthor;
     @FXML private TableView<Item> tableViewCollection;
+    @FXML AnchorPane rootCollection;
     public CollectionController(User user, Database database) {
         this.user = user;
         this.database = database;

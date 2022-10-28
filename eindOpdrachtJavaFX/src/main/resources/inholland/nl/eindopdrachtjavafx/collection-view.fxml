@@ -61,7 +61,7 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#readFromCSV" prefHeight="25.0" prefWidth="120.0" text="Import CSV File">
+            <Button mnemonicParsing="false" onAction="#readFromCSV" prefHeight="25.0" prefWidth="150.0" text="Import CSV File">
                <HBox.margin>
                   <Insets left="40.0" />
                </HBox.margin>
