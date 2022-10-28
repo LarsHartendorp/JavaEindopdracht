@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootCollection" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="77.0" layoutY="14.0" prefHeight="30.0" prefWidth="135.0" styleClass="LabelHeader" text="Items">
          <font>
@@ -42,18 +42,6 @@
         </TableColumn>
         </columns>
       </TableView>
-      <HBox layoutX="77.0" layoutY="409.0" prefHeight="55.0" prefWidth="850.0" spacing="15.0">
-         <children>
-            <Label fx:id="errorLabel" prefHeight="20.0" prefWidth="844.0" text="Tap once on a row to show title and author. Tap twice to edit the availability">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="15.0" right="15.0" top="15.0" />
-         </padding>
-      </HBox>
       <HBox layoutX="77.0" layoutY="364.0" prefHeight="25.0" prefWidth="850.0" spacing="5.0">
          <children>
             <TextField fx:id="textFieldTitle" prefHeight="25.0" prefWidth="298.0" promptText="Title" />
@@ -62,6 +50,26 @@
             <Button mnemonicParsing="false" onAction="#editItem" prefWidth="120.0" text="Edit item" />
             <Button mnemonicParsing="false" onAction="#deleteItem" prefWidth="120.0" text="Delete item" />
          </children>
+      </HBox>
+      <HBox layoutX="77.0" layoutY="409.0" prefHeight="55.0" prefWidth="850.0" spacing="15.0">
+         <children>
+            <Label fx:id="errorLabel" prefHeight="20.0" prefWidth="638.0" text="Tap once on a row to show title and author. Tap twice to edit the availability">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#readFromCSV" prefHeight="25.0" prefWidth="120.0" text="Import CSV File">
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="15.0" right="15.0" top="15.0" />
+         </padding>
       </HBox>
    </children>
 </AnchorPane>
