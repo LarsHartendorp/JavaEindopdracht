@@ -1,7 +1,7 @@
 package inholland.nl.eindopdrachtjavafx.Controllers;
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
-import inholland.nl.eindopdrachtjavafx.Models.Member;
+import inholland.nl.eindopdrachtjavafx.Models.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CollectionController implements Initializable {
-    private Member member;
+    private User user;
     private Database database;
     @FXML private Label errorLabel;
     @FXML private TextField textFieldTitle;
     @FXML private TextField textFieldAuthor;
     @FXML private TableView<Item> tableViewCollection;
-    public CollectionController(Member member, Database database) {
-        this.member = member;
+    public CollectionController(User user, Database database) {
+        this.user = user;
         this.database = database;
     }
     // alle items in de tabelView

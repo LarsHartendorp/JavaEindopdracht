@@ -4,24 +4,21 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Member implements Serializable {
-    //has username and password
+    //has memberID, firstname, lastname and date of birth
     private int memberID;
-    private String username;
     private String firstname;
     private String lastname;
-    private String fullname;
-    private String password;
     private LocalDate dateOfBirth;
-    public Member(int memberID, String username ,String firstname, String lastname, String fullname, LocalDate dateOfBirth ,String password) {
+
+    // Constructor
+    public Member(int memberID, String firstname, String lastname, LocalDate dateOfBirth) {
         this.memberID = memberID;
-        this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.fullname = fullname;
         this.dateOfBirth = dateOfBirth;
-        this.password = password;
     }
 
+    // constructor without memberID
     public Member(String firstname, String lastname, LocalDate dateOfBirth) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -29,14 +26,8 @@ public class Member implements Serializable {
     }
 
     //getters and setters
-    public int getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(int memberID) {
-         this.memberID = memberID;
-    }
-
+    public int getMemberID() { return memberID;}
+    public void setMemberID(int memberID) { this.memberID = memberID; }
     public String getFirstname() {
         return firstname;
     }
@@ -53,18 +44,6 @@ public class Member implements Serializable {
         return this.lastname = lastname;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public String setFullname(String fullname) {
-        return this.fullname = fullname;
-    }
-
-    public String getUsername() { return username; }
-
-    public String setUsername(String username) { return this.username = username; }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -73,11 +52,4 @@ public class Member implements Serializable {
         return this.dateOfBirth = dateOfBirth;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String setPassword(String password) {
-        return this.password = password;
-    }
 }

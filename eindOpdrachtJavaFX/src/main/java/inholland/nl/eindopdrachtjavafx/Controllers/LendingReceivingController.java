@@ -2,7 +2,7 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
-import inholland.nl.eindopdrachtjavafx.Models.Member;
+import inholland.nl.eindopdrachtjavafx.Models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class LendingReceivingController implements Initializable {
     private Database database;
-    private Member member;
+    private User user;
     @FXML private Label nameOfUserLabel;
     @FXML private TextField itemCodeLending;
     @FXML private TextField memberIdentifier;
@@ -26,14 +26,14 @@ public class LendingReceivingController implements Initializable {
 
 
     // Constructor
-    public LendingReceivingController(Member member, Database database) {
-        this.member = member;
+    public LendingReceivingController(User user, Database database) {
+        this.user = user;
         this.database = database;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nameOfUserLabel.setText("Welcome " + member.getFullname());
+        nameOfUserLabel.setText("Welcome " + this.user.getUsername());
     }
 
     public void lendingItem() {
@@ -92,7 +92,7 @@ public class LendingReceivingController implements Initializable {
                 }
             }
         }catch(Exception e){
-            errorHandlingReceiving.setText(e.getMessage());
+            this.errorHandlingReceiving.setText(e.getMessage());
         }
     }
     // check if input is String instead of int
