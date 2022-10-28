@@ -9,7 +9,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +28,7 @@ public class CollectionController implements Initializable {
     @FXML private TextField textFieldTitle;
     @FXML private TextField textFieldAuthor;
     @FXML private TableView<Item> tableViewCollection;
+    @FXML private AnchorPane rootCollection;
     public CollectionController(Member member, Database database) {
         this.member = member;
         this.database = database;
@@ -121,4 +129,32 @@ public class CollectionController implements Initializable {
             }
         });
     }
+
+
+
+    // reading from a csv file and adding the items to the database, only .csv files are allowed
+    @FXML
+    public void readFromCSV() {
+        try {
+           // User input om een .csv file te kiezen.
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Please select a .csv file");
+            // alleen .csv files zijn toegestaan
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+            File selectedCSVFile = fileChooser.showOpenDialog(rootCollection.getScene().getWindow());
+            if (selectedCSVFile != null) {
+                List<String> lines = Files.readAllLines(Paths.get(selectedCSVFile.getAbsolutePath())).stream().skip(1).toList();
+                for (String line : lines) {
+                    String[] item = line.split(";");
+                    Item newItem = new Item(true, item[0], item[1], LocalDate.now());
+                    this.database.addItem(newItem);
+                    this.setItemInTable(this.database.getAllItems());
+                }
+                reloadTable();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
