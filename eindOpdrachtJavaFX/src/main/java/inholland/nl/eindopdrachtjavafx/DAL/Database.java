@@ -2,29 +2,38 @@ package inholland.nl.eindopdrachtjavafx.DAL;
 
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
+import inholland.nl.eindopdrachtjavafx.Models.User;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Database  {
+    private List<User> users;
     private List<Member> members;
-
     private List<Item> items;
 
     public Database() {
+        this.users = new ArrayList<>();
         this.members = new ArrayList<>();
         this.items = new ArrayList<>();
         try {
             loadDataForMembers();
             loadDataForItems();
+            loadDataForUsers();
+/*            throw new IOException();*/
         } catch (IOException e) {
+
             // add users to collection
-            this.members.add(new Member(1, "Lars","Lars", "H", "Lars H", LocalDate.of(1990, 1, 1), "1234"));
-            this.members.add(new Member(2, "Test","Jane", "Doe", "Jane Doe", LocalDate.of(1994, 6, 15), "0000"));
-            this.members.add(new Member(3, "John","John", "Smith", "John Smith", LocalDate.of(1992, 3, 12), "1234"));
-            this.members.add(new Member(4, "Jane2","Jane", "Smith", "Jane Smith", LocalDate.of(1995, 8, 23), "5678"));
-            this.members.add(new Member(5, "John2","John", "Doe", "John Doe", LocalDate.of(1990, 1, 1), "2378"));
+            this.users.add(new User("test", "0000"));
+            this.users.add(new User("admin", "admin"));
+            this.users.add(new User("user", "1234"));
+
+            // add members to collection
+            this.members.add(new Member(1, "Lars", "Hartendorp", LocalDate.of(1996, 8, 15)));
+            this.members.add(new Member(2, "Jeroen", "van der Heijden", LocalDate.of(2000, 10, 7)));
+            this.members.add(new Member(3, "Johan", "Zeurpiet", LocalDate.of(2008, 6, 28)));
 
             // add items to collection
             this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));
@@ -39,8 +48,8 @@ public class Database  {
     }
 
     // return collection of users
-    public List<Member> getMember() {
-        return members;
+    public List<User> getUser() {
+        return users;
     }
 
     public List<Item> getAllItems() {
@@ -245,9 +254,26 @@ public class Database  {
         }
     }
 
+    // save data for users and serialize
+    private void saveDataForUsers() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("users.dat");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            // write loop for all members
+            for (User user : users) {
+                objectOutputStream.writeObject(user);
+            }
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void saveData() {
         saveDataForItems();
         saveDataForMembers();
+        saveDataForUsers();
     }
 
     // load data for items
@@ -281,6 +307,27 @@ public class Database  {
                 try {
                     Member member = (Member) objectInputStream.readObject();
                     members.add(member);
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // load data for users
+    public void loadDataForUsers() throws IOException {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("users.dat");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            // read loop for all members
+            while (true) {
+                try {
+                    User user = (User) objectInputStream.readObject();
+                    users.add(user);
                 } catch (EOFException e) {
                     break;
                 }

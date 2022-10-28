@@ -2,7 +2,7 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.JavaApplication;
-import inholland.nl.eindopdrachtjavafx.Models.Member;
+import inholland.nl.eindopdrachtjavafx.Models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,10 +25,10 @@ public class LoginController {
 
     public void login(ActionEvent event) {
         try {
-            for (Member member : database.getMember()) {
-                if (member.getUsername().equalsIgnoreCase(usernameTextfield.getText()) && member.getPassword().equals(passwordTextfield.getText())) {
+            for (User user : database.getUser()) {
+                if (user.getUsername().equalsIgnoreCase(usernameTextfield.getText()) && user.getPassword().equals(passwordTextfield.getText())) {
                     FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("dashboard-view.fxml"));
-                    DashboardController dashboardController = new DashboardController(member, database);
+                    DashboardController dashboardController = new DashboardController(user, database);
                     fxmlLoader.setController(dashboardController);
                     // maak een Scene aan
                     Scene scene = new Scene(fxmlLoader.load());

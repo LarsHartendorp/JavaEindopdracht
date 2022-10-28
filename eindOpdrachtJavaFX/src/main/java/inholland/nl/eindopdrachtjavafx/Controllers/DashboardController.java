@@ -2,7 +2,7 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.JavaApplication;
-import inholland.nl.eindopdrachtjavafx.Models.Member;
+import inholland.nl.eindopdrachtjavafx.Models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,9 +17,9 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     private Database database;
     @FXML private AnchorPane contentForAllViews;
-    private Member member;
-    public DashboardController(Member member, Database database) {
-        this.member = member;
+    private User user;
+    public DashboardController(User user, Database database) {
+        this.user = user;
         this.database = database;
     }
     @Override
@@ -36,21 +36,21 @@ public class DashboardController implements Initializable {
 
     public void pageCollection() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("collection-view.fxml"));
-        CollectionController collectionController = new CollectionController(member, database);
+        CollectionController collectionController = new CollectionController(user, database);
         fxmlLoader.setController(collectionController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
 
     public void pageMember() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("member-view.fxml"));
-        MemberController memberController = new MemberController(member, database);
+        MemberController memberController = new MemberController(user, database);
         fxmlLoader.setController(memberController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }
 
     public void openPageLending() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(JavaApplication.class.getResource("lending-receiving-view.fxml"));
-        LendingReceivingController lendingReceivingController = new LendingReceivingController(member, database);
+        LendingReceivingController lendingReceivingController = new LendingReceivingController(user, database);
         fxmlLoader.setController(lendingReceivingController);
         this.contentForAllViews.getChildren().setAll((AnchorPane)fxmlLoader.load());
     }

@@ -2,6 +2,7 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
+import inholland.nl.eindopdrachtjavafx.Models.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class MemberController implements Initializable {
 
-    private Member member;
+    private User user;
     private Database database;
     @FXML private TableView<Member> tableViewMember;
     @FXML private TextField firstnameTextfield;
@@ -24,8 +25,8 @@ public class MemberController implements Initializable {
     @FXML private TextField birthdateTextfield;
     @FXML private Label errorLabelMember;
 
-    public MemberController(Member member, Database database) {
-        this.member = member;
+    public MemberController(User user, Database database) {
+        this.user = user;
         this.database = database;
     }
     @Override
