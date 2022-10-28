@@ -3,7 +3,6 @@ package inholland.nl.eindopdrachtjavafx.Controllers;
 import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -32,7 +31,7 @@ public class MemberController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setMemberInTable(this.database.getAllMembers());
-        this.tableViewMember.setOnMouseClicked((MouseEvent) -> {
+        this.tableViewMember.setOnMouseClicked(MouseEvent -> {
             if (MouseEvent.getClickCount() == 1) {
                 try {
                     Member member = tableViewMember.getSelectionModel().getSelectedItem();
@@ -49,15 +48,18 @@ public class MemberController implements Initializable {
         });
     }
 
+    // herlaad de tabelView
     private void reloadTable() {
         setMemberInTable(this.database.getAllMembers());
         this.tableViewMember.refresh();
     }
 
+    // set alle members in de tabelView
     private void setMemberInTable(List<Member> members){
         tableViewMember.setItems(FXCollections.observableArrayList(members));
     }
 
+    // voeg een member toe aan de database
     public void addMember() {
         try {
             String firstname = firstnameTextfield.getText();
@@ -65,6 +67,7 @@ public class MemberController implements Initializable {
             if (firstname.isEmpty() || lastname.isEmpty() || birthdateTextfield.getText().isEmpty()) {
                 throw new Exception("Please fill in all fields to add new member");
             }
+            // else is niet nodig omdat er een exception wordt gegooid als de velden niet zijn ingevuld. Flow control
             LocalDate birthdate = LocalDate.parse(birthdateTextfield.getText());
             Member member = new Member(firstname, lastname, birthdate);
             this.database.addMember(member);
@@ -75,6 +78,7 @@ public class MemberController implements Initializable {
         }
     }
 
+    // bewerk een member in de database
     public void editMember() {
         try {
             Member member = tableViewMember.getSelectionModel().getSelectedItem();
@@ -97,6 +101,7 @@ public class MemberController implements Initializable {
         }
     }
 
+    // verwijder een member uit de database
     public void deleteMember() {
         try {
             Member member = tableViewMember.getSelectionModel().getSelectedItem();

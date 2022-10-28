@@ -3,7 +3,6 @@ import inholland.nl.eindopdrachtjavafx.DAL.Database;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -26,14 +25,17 @@ public class CollectionController implements Initializable {
         this.member = member;
         this.database = database;
     }
+    // alle items in de tabelView
     private void setItemInTable(List<Item> items){
         tableViewCollection.setItems(FXCollections.observableArrayList(items));
     }
+    // herladen van de tabelView
     private void reloadTable() {
         setItemInTable(this.database.getAllItems());
         this.tableViewCollection.refresh();
     }
 
+    // toevoegen van een item
     public void addItem() {
         try {
             String title = textFieldTitle.getText();
@@ -50,6 +52,7 @@ public class CollectionController implements Initializable {
         }
     }
 
+    // bewerken van een item
     public void editItem() {
         try {
             String title = textFieldTitle.getText();
@@ -67,9 +70,11 @@ public class CollectionController implements Initializable {
         }
     }
 
+    // verwijderen van een item
     public void deleteItem() {
         try {
             Item item = tableViewCollection.getSelectionModel().getSelectedItem();
+            // alert als waarschuwing.
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             if (item == null) {
                 throw new Exception("Please select an item to delete");
@@ -89,7 +94,8 @@ public class CollectionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setItemInTable(this.database.getAllItems());
-        this.tableViewCollection.setOnMouseClicked((MouseEvent) -> {
+        this.tableViewCollection.setOnMouseClicked(MouseEvent -> {
+            // 1x klikken om rij te selecteren en tekstvelden te vullen
             if (MouseEvent.getClickCount() == 1) {
                 try {
                     Item item = tableViewCollection.getSelectionModel().getSelectedItem();
@@ -101,6 +107,7 @@ public class CollectionController implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                // 2x klikken om de beschikbaarheid van het item te veranderen
             } else if (MouseEvent.getClickCount() == 2) {
                 // double click
                 try {
