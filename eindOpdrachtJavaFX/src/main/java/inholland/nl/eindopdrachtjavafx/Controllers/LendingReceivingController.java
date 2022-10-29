@@ -13,8 +13,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class LendingReceivingController implements Initializable {
-    private Database database;
-    private User user;
+    private final Database database;
+    private final User user;
     @FXML private Label nameOfUserLabel;
     @FXML private TextField itemCodeLending;
     @FXML private TextField memberIdentifier;
@@ -33,7 +33,7 @@ public class LendingReceivingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nameOfUserLabel.setText("Welcome " + this.user.getUsername());
+        nameOfUserLabel.setText("Welcome " + this.user.getFirstname() + " " + this.user.getLastname());
     }
 
     public void lendingItem() {

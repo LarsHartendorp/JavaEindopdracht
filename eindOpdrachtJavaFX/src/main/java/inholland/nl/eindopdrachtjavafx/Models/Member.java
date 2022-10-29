@@ -31,25 +31,18 @@ public class Member implements Serializable {
     public String getFirstname() {
         return firstname;
     }
-
-    public String setFirstname(String firstname) {
-        return this.firstname = firstname;
-    }
-
+    public void setFirstname(String firstname) { this.firstname = firstname;}
     public String getLastname() {
         return lastname;
     }
-
-    public String setLastname(String lastname) {
-        return this.lastname = lastname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
-
-    public LocalDate setDateOfBirth(LocalDate dateOfBirth) {
-        return this.dateOfBirth = dateOfBirth;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
 }

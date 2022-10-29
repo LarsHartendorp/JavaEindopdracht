@@ -15,9 +15,9 @@ import java.util.ResourceBundle;
 // clickevents worden hier afgehandeld
 // praat met de logica laag
 public class DashboardController implements Initializable {
-    private Database database;
+    private final Database database;
     @FXML private AnchorPane contentForAllViews;
-    private User user;
+    private final User user;
     public DashboardController(User user, Database database) {
         this.user = user;
         this.database = database;

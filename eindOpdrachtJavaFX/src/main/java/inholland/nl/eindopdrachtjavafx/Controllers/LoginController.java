@@ -15,22 +15,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController {
-    private Database database;
+    private final Database database;
     @FXML private TextField usernameTextfield;
     @FXML private PasswordField passwordTextfield;
     @FXML private Label errorLabel;
 
-    public LoginController() {
+    public LoginController() throws IOException {
         this.database = new Database();
     }
 
     public void login(ActionEvent event) throws IOException {
-       User user = this.database.getUserByUsername(usernameTextfield.getText());
-       if (user.getUsername().equalsIgnoreCase(usernameTextfield.getText()) && user.getPassword().equals(passwordTextfield.getText())) {
-            mainView(user, event);
-       } else {
-           errorLabel.setText("Username or password is incorrect");
-       }
+        try {
+            if (this.usernameTextfield.getText().isEmpty() || this.passwordTextfield.getText().isEmpty()) {
+                throw new Exception("Please fill in all fields");
+            }
+            User user = this.database.getUserByUsername(usernameTextfield.getText());
+            if (user.getUsername().equalsIgnoreCase(usernameTextfield.getText()) && user.getPassword().equals(passwordTextfield.getText())) {
+                mainView(user, event);
+            } else {
+                throw new Exception("Username or password is incorrect");
+            }
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 
     private void mainView(User user, ActionEvent event) throws IOException {

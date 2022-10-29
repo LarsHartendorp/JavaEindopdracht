@@ -3,7 +3,6 @@ package inholland.nl.eindopdrachtjavafx.DAL;
 import inholland.nl.eindopdrachtjavafx.Models.Item;
 import inholland.nl.eindopdrachtjavafx.Models.Member;
 import inholland.nl.eindopdrachtjavafx.Models.User;
-import javafx.scene.control.DatePicker;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -11,41 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database  {
-    private List<User> users;
-    private List<Member> members;
-    private List<Item> items;
+    private final List<User> users;
+    private final List<Member> members;
+    private final List<Item> items;
 
-    public Database() {
+    public Database() throws IOException {
         this.users = new ArrayList<>();
         this.members = new ArrayList<>();
         this.items = new ArrayList<>();
-        try {
-            loadDataForMembers();
-            loadDataForItems();
-            loadDataForUsers();
-/*            throw new IOException();*/
-        } catch (IOException e) {
+        loadData();
+    }
 
-            // add users to collection
-            this.users.add(new User("admin", "admin"));
-            this.users.add(new User("test", "0000"));
-            this.users.add(new User("user", "1234"));
+    public void existingUsers(){
+        // add users to collection
+        this.users.add(new User("ad", "min","admin", "admin"));
+        this.users.add(new User("firstname", "lastname", "test", "0000"));
+        this.users.add(new User("new", "user", "user", "1234"));
+    }
 
-            // add members to collection, date of birth must be YYYY-MM-DD
-            this.members.add(new Member(1, "Lars", "Hartendorp", LocalDate.of(2000, 12, 15)));
-            this.members.add(new Member(2, "Jeroen", "van der Heijden", LocalDate.of(1999, 6, 3)));
-            this.members.add(new Member(3, "Johan", "Zeurpiet", LocalDate.of(1987, 1, 2)));
+    public void existingMembers(){
+        // add members to collection, date of birth must be YYYY-MM-DD
+        this.members.add(new Member(1, "Lars", "Hartendorp", LocalDate.of(2000, 12, 15)));
+        this.members.add(new Member(2, "Jeroen", "van der Heijden", LocalDate.of(1999, 6, 3)));
+        this.members.add(new Member(3, "Johan", "Zeurpiet", LocalDate.of(1987, 1, 2)));
+    }
 
-            // add items to collection
-            this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));
-            this.items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", LocalDate.of(1998, 7, 2)));
-            this.items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", LocalDate.of(1999, 7, 8)));
-            this.items.add(new Item(4, true, "Harry Potter and the Goblet of Fire", "J.K. Rowling", LocalDate.of(2000, 7, 8)));
-            this.items.add(new Item(5, true, "Harry Potter and the Order of the Phoenix", "J.K. Rowling", LocalDate.of(2003, 6, 21)));
-            this.items.add(new Item(6, true, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", LocalDate.of(2005, 7, 16)));
-            this.items.add(new Item(7, true, "Harry Potter and the Deathly Hallows", "J.K. Rowling", LocalDate.of(2007, 7, 21)));
-        }
-
+    public void existingItems(){
+        // add items to collection
+        this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));
+        this.items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", LocalDate.of(1998, 7, 2)));
+        this.items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", LocalDate.of(1999, 7, 8)));
+        this.items.add(new Item(4, true, "Harry Potter and the Goblet of Fire", "J.K. Rowling", LocalDate.of(2000, 7, 8)));
+        this.items.add(new Item(5, true, "Harry Potter and the Order of the Phoenix", "J.K. Rowling", LocalDate.of(2003, 6, 21)));
+        this.items.add(new Item(6, true, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", LocalDate.of(2005, 7, 16)));
+        this.items.add(new Item(7, true, "Harry Potter and the Deathly Hallows", "J.K. Rowling", LocalDate.of(2007, 7, 21)));
     }
 
     // return collection of users
@@ -83,14 +81,11 @@ public class Database  {
     // make method to check if itemcode and member are in database
     public boolean checkItemCodeAndMember(int itemCode, int memberID) {
         // check if itemcode is in database
-        for (Item item : items) {
-            if (item.getItemCode() == itemCode) {
-                // check if member is in database
-                for (Member existingMember : members) {
-                    if (existingMember.getMemberID() == memberID) {
-                        return true;
-                    }
-                }
+        checkItemCode(itemCode);
+        // check if member is in database
+        for (Member existingMember : members) {
+            if (existingMember.getMemberID() == memberID) {
+                return true;
             }
         }
         return false;
@@ -135,7 +130,6 @@ public class Database  {
             for (Item item : items) {
                 if (item.getItemCode() == itemCode) {
                     item.setAvailability(true);
-/*                    item.setLendingDate(null);*/ // dit moet nog worden aangepast, als dat mogelijk is. Null veroorzaakt error.
                     return true;
                 }
             }
@@ -285,6 +279,19 @@ public class Database  {
         saveDataForItems();
         saveDataForMembers();
         saveDataForUsers();
+    }
+
+    public void loadData() throws IOException {
+        // als de file bestaat, dan uit die file pakken. anders de gehardcode data gebruiken
+        if (new File("users.dat").exists()) {loadDataForUsers();}
+        else existingUsers();
+
+        if (new File("items.dat").exists()) {loadDataForItems();}
+        else existingItems();
+
+        if (new File("members.dat").exists()) {loadDataForMembers();}
+        else existingMembers();
+
     }
 
     // load data for items

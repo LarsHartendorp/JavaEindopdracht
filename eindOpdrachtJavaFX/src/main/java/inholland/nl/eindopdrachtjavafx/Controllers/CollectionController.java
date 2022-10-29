@@ -22,8 +22,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CollectionController implements Initializable {
-    private User user;
-    private Database database;
+
+    // user wordt nooit gebruikt
+
+    private final User user;
+    private final Database database;
     @FXML private Label errorLabel;
     @FXML private TextField textFieldTitle;
     @FXML private TextField textFieldAuthor;
@@ -66,9 +69,9 @@ public class CollectionController implements Initializable {
             String title = textFieldTitle.getText();
             String author = textFieldAuthor.getText();
             Item item = tableViewCollection.getSelectionModel().getSelectedItem();
-            if (item == null) {
-                throw new Exception("Please select an item to edit");
-            }
+
+            if (item == null) throw new Exception("Please select an item to edit");
+
             item.setTitle(title);
             item.setAuthor(author);
             this.database.editItem(item);

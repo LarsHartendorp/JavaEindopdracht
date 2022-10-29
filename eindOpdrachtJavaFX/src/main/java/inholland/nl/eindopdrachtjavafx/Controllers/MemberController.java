@@ -15,8 +15,8 @@ import java.util.ResourceBundle;
 
 public class MemberController implements Initializable {
 
-    private User user;
-    private Database database;
+    private final User user;
+    private final Database database;
     @FXML private TableView<Member> tableViewMember;
     @FXML private TextField firstnameTextfield;
     @FXML private TextField lastnameTextfield;
