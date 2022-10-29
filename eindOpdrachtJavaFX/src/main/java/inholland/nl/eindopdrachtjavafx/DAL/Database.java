@@ -27,8 +27,8 @@ public class Database  {
         } catch (IOException e) {
 
             // add users to collection
-            this.users.add(new User("test", "0000"));
             this.users.add(new User("admin", "admin"));
+            this.users.add(new User("test", "0000"));
             this.users.add(new User("user", "1234"));
 
             // add members to collection, date of birth must be YYYY-MM-DD
@@ -51,6 +51,16 @@ public class Database  {
     // return collection of users
     public List<User> getUser() {
         return users;
+    }
+
+    // get user by username
+    public User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public List<Item> getAllItems() {
