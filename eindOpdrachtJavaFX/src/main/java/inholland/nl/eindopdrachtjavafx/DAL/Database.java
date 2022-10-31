@@ -36,14 +36,21 @@ public class Database  {
     }
 
     public void existingItems(){
-        // add items to collection
-        this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(1997, 6, 26)));
-        this.items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", LocalDate.of(1998, 7, 2)));
-        this.items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", LocalDate.of(1999, 7, 8)));
-        this.items.add(new Item(4, true, "Harry Potter and the Goblet of Fire", "J.K. Rowling", LocalDate.of(2000, 7, 8)));
-        this.items.add(new Item(5, true, "Harry Potter and the Order of the Phoenix", "J.K. Rowling", LocalDate.of(2003, 6, 21)));
-        this.items.add(new Item(6, true, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", LocalDate.of(2005, 7, 16)));
-        this.items.add(new Item(7, true, "Harry Potter and the Deathly Hallows", "J.K. Rowling", LocalDate.of(2007, 7, 21)));
+        // add items to collection DEZE VOLGORDE KOMT NIET OVEREEN MET DE GEKOZEN VOLGORDE UIT DE INLEES CSV.
+        this.items.add(new Item(1, true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling", LocalDate.of(2022, 6, 26)));
+        this.items.add(new Item(2, true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling", LocalDate.of(2022, 7, 2)));
+        this.items.add(new Item(3, true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", LocalDate.of(2022, 7, 8)));
+        this.items.add(new Item(4, true, "Harry Potter and the Goblet of Fire", "J.K. Rowling", LocalDate.of(2022, 7, 8)));
+        this.items.add(new Item(5, true, "Harry Potter and the Order of the Phoenix", "J.K. Rowling", LocalDate.of(2022, 6, 21)));
+        this.items.add(new Item(6, true, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", LocalDate.of(2022, 7, 16)));
+        this.items.add(new Item(7, true, "Harry Potter and the Deathly Hallows", "J.K. Rowling", LocalDate.of(2022, 7, 21)));
+
+        // items uit CSV zijn itemcode, beschikbaarheid, titel, auteur
+         this.items.add(new Item(String.valueOf(1), true, "Harry Potter and the Philosopher's Stone", "J.K. Rowling"));
+         this.items.add(new Item(String.valueOf(2), true, "Harry Potter and the Chamber of Secrets", "J.K. Rowling"));
+         this.items.add(new Item(String.valueOf(3), true, "Harry Potter and the Prisoner of Azkaban", "J.K. Rowling"));
+         this.items.add(new Item(String.valueOf(4), true, "Harry Potter and the Goblet of Fire", "J.K. Rowling"));
+         this.items.add(new Item(String.valueOf(4), true, "Harry Potter and the Goblet of Fire", "J.K. Rowling"));
     }
 
     // return collection of users
@@ -61,7 +68,11 @@ public class Database  {
         return null;
     }
 
-    public List<Item> getAllItems() {
+/*    public List<Item> getAllItems() {
+        return items;
+    }*/
+
+    public List<Item> getAllItemsCSV() {
         return items;
     }
 
@@ -119,7 +130,9 @@ public class Database  {
             for (Item item : items) {
                 if (item.getItemCode() == itemCode) {
                     item.setAvailability(false);
-                    item.setLendingDate(LocalDate.now());
+                    //item.setLendingDate(LocalDate.now());
+                    // set date of more than 30 days ago
+                    item.setLendingDate(LocalDate.now().minusDays(31));
                     return;
                 }
             }
@@ -162,6 +175,11 @@ public class Database  {
         item.setItemCode(this.generateItemCode());
         items.add(item);
     }
+
+    public void addItemCSV(Item item) {
+        items.add(item);
+    }
+
     public void addMember(Member member) {
         member.setMemberID(this.generateMemberID());
         members.add(member);

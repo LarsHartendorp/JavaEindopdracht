@@ -54,6 +54,11 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Label fx:id="totalFine" disable="true" visible="false" prefHeight="20.0" prefWidth="261.0" />
+            <Button fx:id="payFine" disable="true" onAction="#finePayed" visible="false" mnemonicParsing="false" text="Pay fine">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
             <HBox.margin>
                <Insets />
             </HBox.margin>

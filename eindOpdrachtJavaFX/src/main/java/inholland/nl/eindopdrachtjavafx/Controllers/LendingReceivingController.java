@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -24,7 +26,11 @@ public class LendingReceivingController implements Initializable {
     @FXML private TextField itemCodeReceiving;
     @FXML public Button receiveButton;
 
+    @FXML private Label totalFine;
 
+    @FXML private Button payFine;
+
+    final int DAYS_OVERDUE = 21;
     // Constructor
     public LendingReceivingController(User user, Database database) {
         this.user = user;
@@ -70,7 +76,7 @@ public class LendingReceivingController implements Initializable {
             // check if input is digit
             checkIfInputIsString(itemCodeReceiving.getText(), "item code can't be a string");
             int itemCode = Integer.parseInt(itemCodeReceiving.getText());
-            final int DAYS_OVERDUE = 21;
+
             if (itemCode < 1) {
                 throw new NumberFormatException("Item code can't be lower than 1");
             }
@@ -84,23 +90,70 @@ public class LendingReceivingController implements Initializable {
             }else {
                 Item item = this.database.getItem(itemCode);
                 if (item.getLendingDate().plusDays(DAYS_OVERDUE).isBefore(LocalDate.now())) {
-                    this.database.receivedItem(itemCode); // instead of received item, add a fine. (Will do this later if necessary)
-                    throw new Exception("Item is overdue by " + this.database.calculateOverdueDays(itemCode) + " days. There will be a fine.");
-                } else {
                     this.database.receivedItem(itemCode);
-                    throw new Exception("Item " + itemCodeReceiving.getText() + " has been received.");
+                    // instead of received item, add a fine.
+                    // disable button of receiving item
+                    // show days overdue
+                    // show a 'pay fine' button
+                    double fine = 0;
+                    this.receiveButton.setDisable(true);
+                    this.totalFine.setDisable(false);
+                    this.payFine.setDisable(false);
+                    this.totalFine.setVisible(true);
+                    this.payFine.setVisible(true);
+                    this.errorHandlingReceiving.setText("Item is overdue by " + this.database.calculateOverdueDays(itemCode) + " days");
+                    // deze "0" is niet netjes nog. LATER NAAR KIJKEN!!!!
+                    this.totalFine.setText("You have to pay a fine of €" + this.calculateFine(fine) + "0 euro");
+                    // if pay fine button is clicked, the ‘Receive item’ button is enabled again.
+                    this.payFine.setOnAction(event -> {
+                        this.receiveButton.setDisable(false);
+                        this.totalFine.setDisable(true);
+                        this.payFine.setDisable(true);
+                        this.totalFine.setVisible(false);
+                        this.payFine.setVisible(false);
+                        this.errorHandlingReceiving.setText("");
+                        finePayed();
+                    });
+
                 }
+                //this.database.receivedItem(itemCode);
+                //throw new Exception("Item " + itemCodeReceiving.getText() + " has been received.");
+
             }
         }catch(Exception e){
             this.errorHandlingReceiving.setText(e.getMessage());
         }
     }
+
+    public void finePayed(){
+        this.receiveButton.setDisable(false);
+        this.payFine.setDisable(false);
+        this.totalFine.setDisable(false);
+        this.totalFine.setVisible(false);
+        this.payFine.setVisible(false);
+        this.errorHandlingReceiving.setText("");
+    }
+
+    private String calculateFine(double fine) {
+        // fine will be calculated when item is more than 21 days overdue
+        // the fine is 10 cents per day late
+
+        fine = 0;
+        int daysOverdue = this.database.calculateOverdueDays(Integer.parseInt(itemCodeReceiving.getText()));
+        if(daysOverdue > DAYS_OVERDUE){
+            fine = (daysOverdue - DAYS_OVERDUE) * 0.10;
+        }
+        return String.valueOf(fine);
+    }
+
+
     // check if input is String instead of int
     private void checkIfInputIsString(String input, String exceptionMessage) {
         if (input.matches("[a-zA-Z]+")) {
             throw new NumberFormatException(exceptionMessage);
         }
     }
+
 }
 
 

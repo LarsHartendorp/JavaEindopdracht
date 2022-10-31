@@ -42,7 +42,7 @@ public class CollectionController implements Initializable {
     }
     // herladen van de tabelView
     private void reloadTable() {
-        setItemInTable(this.database.getAllItems());
+        setItemInTable(this.database.getAllItemsCSV());
         this.tableViewCollection.refresh();
     }
 
@@ -104,7 +104,7 @@ public class CollectionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setItemInTable(this.database.getAllItems());
+        setItemInTable(this.database.getAllItemsCSV());
         this.tableViewCollection.setOnMouseClicked(MouseEvent -> {
             // 1x klikken om rij te selecteren en tekstvelden te vullen
             if (MouseEvent.getClickCount() == 1) {
@@ -134,6 +134,19 @@ public class CollectionController implements Initializable {
     }
 
 
+    // make method to calculate the expected return date
+    public void calculateReturnDate() {
+        Item item = tableViewCollection.getSelectionModel().getSelectedItem();
+        if (item == null) {
+            return;
+        }
+        if (!item.getAvailability()) {
+            // set the expected return date from the lending date + 21 days in the tablecolumn
+            LocalDate expectedReturnDate = item.getLendingDate().plusDays(21);
+            item.setExpectedReturnDate(expectedReturnDate);
+        }
+    }
+
 
     // reading from a csv file and adding the items to the database, only .csv files are allowed
     @FXML
@@ -143,15 +156,15 @@ public class CollectionController implements Initializable {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Please select a .csv file");
             // alleen .csv files zijn toegestaan
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open CSV File", "*.csv"));
             File selectedCSVFile = fileChooser.showOpenDialog(rootCollection.getScene().getWindow());
             if (selectedCSVFile != null) {
                 List<String> lines = Files.readAllLines(Paths.get(selectedCSVFile.getAbsolutePath())).stream().skip(1).toList();
                 for (String line : lines) {
                     String[] item = line.split(";");
-                    Item newItem = new Item(true, item[0], item[1], LocalDate.now());
-                    this.database.addItem(newItem);
-                    this.setItemInTable(this.database.getAllItems());
+                    Item newItem = new Item(item[0], true, item[1], item[2]);
+                    this.database.addItemCSV(newItem);
+                    this.setItemInTable(this.database.getAllItemsCSV());
                 }
                 reloadTable();
             }

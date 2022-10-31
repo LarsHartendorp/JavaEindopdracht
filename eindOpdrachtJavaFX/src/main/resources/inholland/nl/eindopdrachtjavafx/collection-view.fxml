@@ -30,16 +30,21 @@
                   <PropertyValueFactory property="availability" />
               </cellValueFactory>
           </TableColumn>
-            <TableColumn prefWidth="389.0" text="Title">
+            <TableColumn prefWidth="223.0" text="Title">
                 <cellValueFactory>
                     <PropertyValueFactory property="title" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="263.0" text="Author">
+            <TableColumn minWidth="0.0" prefWidth="218.0" text="Author">
             <cellValueFactory>
                 <PropertyValueFactory property="author" />
             </cellValueFactory>
         </TableColumn>
+            <TableColumn prefWidth="210.0" text="Expected return date">
+               <cellValueFactory>
+                  <PropertyValueFactory property="author" />
+               </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <HBox layoutX="77.0" layoutY="364.0" prefHeight="25.0" prefWidth="850.0" spacing="5.0">
@@ -61,7 +66,7 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#readFromCSV" prefHeight="25.0" prefWidth="150.0" text="Import CSV File">
+            <Button mnemonicParsing="false" onAction="#readFromCSV" prefHeight="25.0" prefWidth="150.0" text="Import Items">
                <HBox.margin>
                   <Insets left="40.0" />
                </HBox.margin>
