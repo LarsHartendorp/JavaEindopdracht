@@ -11,3 +11,11 @@ n
 	users.dat,5\7\57ec5731a4497ab5f13787de76a118c0e3865e46
 p
 @src/main/java/inholland/nl/eindopdrachtjavafx/Models/Member.java,0\0\009fe84d40209384d5752e9c06ddad147fb4e949
+~
+Nsrc/main/java/inholland/nl/eindopdrachtjavafx/Controllers/LoginController.java,3\6\3666c1353d1fbae1e88256cccc8b936619995842
+‚
+Rsrc/main/java/inholland/nl/eindopdrachtjavafx/Controllers/DashboardController.java,3\3\3312c18d863db2c3d745ea55a2c44fc1caacd0fa
+ƒ
+Ssrc/main/java/inholland/nl/eindopdrachtjavafx/Controllers/CollectionController.java,e\a\ea27d7664b248ea66a64ad2d1532afb0c9be7a55
+o
+?src/main/java/inholland/nl/eindopdrachtjavafx/DAL/Database.java,8\5\85003c24e2a274d91d3cc4c449376be5791d0c4b

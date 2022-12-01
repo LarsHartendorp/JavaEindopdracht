@@ -1,0 +1,49 @@
+
+a
+java:S1192›"JDefine a constant instead of duplicating this literal "users.dat" 3 times.(öþ–¼
+p
+java:S1192("NDefine a constant instead of duplicating this literal "J.K. Rowling" 12 times.(ßÂåóÿÿÿÿÿ8Æ¬­ïÂ0
+†
+java:S1192+"dDefine a constant instead of duplicating this literal "Harry Potter and the Goblet of Fire" 3 times.(Áê­úÿÿÿÿ8­¬„ðÂ0
+a
+java:S1192û"JDefine a constant instead of duplicating this literal "items.dat" 3 times.(—ûØ˜
+h
+java:S1192‹"LDefine a constant instead of duplicating this literal "members.dat" 3 times.(›Ïœ¤ùÿÿÿÿ
+Q
+java:S1141Â"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Q
+java:S1141×"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Q
+java:S1141ì"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+d
+java:S2259~"IA "NullPointerException" could be thrown; "lendingDate" is nullable here.(çšíúÿÿÿÿ
+e
+java:S2095û"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(—ûØ˜
+f
+java:S2095¿"OUse try-with-resources or close this "ObjectInputStream" in a "finally" clause.(´¢Žß
+j
+java:S2095‹"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(›Ïœ¤ùÿÿÿÿ
+c
+java:S2095¾"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(å‡¿u
+e
+java:S2095›"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(öþ–¼
+g
+java:S2095œ"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(«Þó°
+f
+java:S2095é"OUse try-with-resources or close this "ObjectInputStream" in a "finally" clause.(´¢Žß
+f
+java:S2095Ô"OUse try-with-resources or close this "ObjectInputStream" in a "finally" clause.(´¢Žß
+d
+java:S2095Ó"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(¹À»ö
+g
+java:S2095ü"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(«Þó°
+g
+java:S2095Œ"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(«Þó°
+i
+java:S2095è"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(±ˆËôùÿÿÿÿ
+>
+java:S2189Ö""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ
+>
+java:S2189ë""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ
+>
+java:S2189Á""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ
